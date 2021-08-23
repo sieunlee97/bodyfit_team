@@ -1,6 +1,8 @@
 package com.bodyfit.bodyfit.domain;
 
-import java.time.LocalDateTime;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -15,11 +17,14 @@ public class MemberDTO {
 	/*사용자 비밀번호*/
 	private String password;
 	/*가입일시*/
-	private LocalDateTime reg_date;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+	private Date reg_date;
 	/*수정일시*/
-	private LocalDateTime update_date;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+	private Date update_date;
 	/*마지막 로그인 일시*/
-	private LocalDateTime last_login_date;
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
+	private Date last_login_date;
 	/*로그인 횟수*/
 	private int login_cnt;
 	/*활성 상태(가입/탈퇴)*/
@@ -46,22 +51,22 @@ public class MemberDTO {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public LocalDateTime getReg_date() {
+	public Date getReg_date() {
 		return reg_date;
 	}
-	public void setReg_date(LocalDateTime reg_date) {
+	public void setReg_date(Date reg_date) {
 		this.reg_date = reg_date;
 	}
-	public LocalDateTime getUpdate_date() {
+	public Date getUpdate_date() {
 		return update_date;
 	}
-	public void setUpdate_date(LocalDateTime update_date) {
+	public void setUpdate_date(Date update_date) {
 		this.update_date = update_date;
 	}
-	public LocalDateTime getLast_login_date() {
+	public Date getLast_login_date() {
 		return last_login_date;
 	}
-	public void setLast_login_date(LocalDateTime last_login_date) {
+	public void setLast_login_date(Date last_login_date) {
 		this.last_login_date = last_login_date;
 	}
 	public int getLogin_cnt() {
