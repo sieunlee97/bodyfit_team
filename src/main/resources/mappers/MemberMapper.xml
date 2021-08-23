@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bodyfit.bodyfit.mapper.MemberMapper">
+	<sql id="memberColumns">
+		  email
+		, nickname
+		, password
+		, reg_date
+		, update_date
+		, last_login_date
+		, login_cnt
+		, enabled
+		, levels
+	</sql>
+	
+	<insert id="insertMember" parameterType="MemberDTO">
+		INSERT INTO tbl_member (
+				<include refid="memberColumns" />
+		)VALUES(
+				  #{email}
+				, #{nickname}
+				, #{password}
+				, NOW()
+				, NOW()
+				, NOW()
+				, 0
+				, 'Y'
+				, 'free'
+		)	
+	</insert>
+	
+	<select id="selectMemberDetail" parameterType="string" resultType="MemberDTO">
+		SELECT
+			<include refid="memberColumns" />
+		FROM
+			tbl_member
+		WHERE
+			email = #{email}
+	</select>
+	
+	<update id="updateMember" parameterType="MemberDTO">
+		UPDATE tbl_member
+		SET
+				  update_date = NOW()
+				, nickname = #{nickname}
+				, password = #{password}
+				, enabled = #{enabled}
+				, levels = #{levels}
+		WHERE
+				email = #{email}
+	</update>
+	
+	<update id="deleteMember" parameterType="string">
+		UPDATE tbl_member
+		SET
+				  enabled = 'N'
+				, update_date = NOW()
+		WHERE
+				email = #{email}
+	</update>
+	
+	<select id="selectMemberList" parameterType="MemberDTO" resultType="MemberDTO">
+		SELECT
+				<include refid="memberColumns" />
+		FROM
+				tbl_member
+		ORDER BY
+				reg_date DESC
+	</select>
+	
+	<select id="selectMemberTotalCount" parameterType="MemberDTO" resultType="int">
+		SELECT
+				COUNT(*)
+		FROM
+				tbl_member
+		WHERE 
+				enabled = 'Y'
+	</select>
+</mapper>
+
