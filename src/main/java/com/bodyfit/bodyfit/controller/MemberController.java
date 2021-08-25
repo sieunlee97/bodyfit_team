@@ -8,14 +8,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.bodyfit.bodyfit.service.MemberService;
 
 @Controller
-public class LoginController {
+public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
 	
-	@GetMapping(value="/member/login.do")
+	@GetMapping(value="/member/mypage.do")
 	public String openLogin(Model model) {
-		return "member/login";
+		return "member/mypage";
+		
+	}
+	
+	@GetMapping(value="/")
+	public String home(Model model) {
+		return "index";
 		
 	}
 }
