@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,6 +13,7 @@ import lombok.Setter;
 public class MemberDTO {
 	/*사용자 이메일*/
 	private String email;
+	
 	/*사용자 닉네임*/
 	private String nickname;
 	/*사용자 비밀번호*/
@@ -31,8 +33,7 @@ public class MemberDTO {
 	private String enabled;
 	/*권한*/
 	private String levels;
-	
-	
+
 	public String getEmail() {
 		return email;
 	}
