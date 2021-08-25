@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{member/layout/layout}">
+<head>
+	<!-- 필요한 CSS, script 추가 영역 -->
+</head>
+<th:block layout:fragment="title">
+	<title>My Page</title>
+</th:block>
+
+<section layout:fragment="content">
+<div class="container-fluid">
+			<div class="page-wrapper">
+				<div class="page-breadcrumb">
+					<div class="row align-items-center">
+						<div class="col-md-6 col-8 align-self-center">
+							<h3 class="page-title mb-0 p-0">마이페이지</h3>
+							<div class="d-flex align-items-center">
+								<nav aria-label="breadcrumb">
+									<ol class="breadcrumb">
+										<li class="breadcrumb-item"><a href="#">Home</a></li>
+										<li class="breadcrumb-item active" aria-current="page">마이페이지</li>
+									</ol>
+								</nav>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- ============================================================== -->
+				<div class="container-fluid">
+					<div class="row">
+						<!-- Column -->
+						<div class="col-lg-6 col-xlg-5 col-md-6">
+							<div class="card">
+								<div class="card-body">
+									<form class="form-horizontal form-material mx-2">
+										<h4 class="mb-3 mt-1">가입정보</h4>
+										<hr class="my-2">
+										<div class="form-group">
+											<label for="email" class="col-md-12">이메일</label>
+											<div class="col-md-12">
+												<input type="email" placeholder="이메일을 입력해주세요."
+													class="form-control ps-0 form-control-line" name="email"
+													id="email">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="nickname" class="col-md-12 mb-0">닉네임</label>
+											<div class="col-md-12">
+												<input type="text" placeholder="닉네임을 입력해주세요."
+													class="form-control ps-0 form-control-line" name="nickname"
+													id="nickname">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="password" class="col-md-12 mb-0">비밀번호</label>
+											<div class="col-md-12">
+												<input type="password" value="password"
+													class="form-control ps-0 form-control-line" name="password"
+													id="password">
+											</div>
+										</div>
+										<h4 class="mb-3 mt-5">신체정보</h4>
+										<hr class="my-2">
+										<div class="form-group">
+											<label for="height" class="col-md-12 mb-0">키</label>
+											<div class="col-md-12">
+												<input type="text" placeholder="키(cm)를 입력해주세요."
+													class="form-control ps-0 form-control-line" name="height"
+													id="height">
+											</div>
+										</div>
+										<div class="form-group">
+											<label for="weight" class="col-md-12 mb-0">몸무게</label>
+											<div class="col-md-12">
+												<input type="text" placeholder="몸무게(kg)를 입력해주세요."
+													class="form-control ps-0 form-control-line" name="weight"
+													id="weight">
+											</div>
+										</div>
+
+										<div class="form-group  float-right">
+											<div class="col-sm-12 d-flex">
+												<button class="btn btn-primary text-white mt-3 mx-1">
+													수정하기</button>
+												<button class="btn btn-primary text-white mt-3">
+													탈퇴하기</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+						<!-- Column -->
+					</div>
+					<!-- Row -->
+					<!-- ============================================================== -->
+					<!-- End PAge Content -->
+					<!-- ============================================================== -->
+					<!-- ============================================================== -->
+				</div>
+				<!-- ============================================================== -->
+				<!-- End Container fluid  -->
+				<!-- ============================================================== -->
+				<!-- ============================================================== -->
+
+			</div>
+		</div>
+</section>
+</html>
