@@ -1,59 +1,62 @@
 package com.bodyfit.bodyfit.service;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.bodyfit.bodyfit.dao.MemberDAO;
 import com.bodyfit.bodyfit.domain.MemberDTO;
-import com.bodyfit.bodyfit.mapper.MemberMapper;
 
 @Service
 public class MemberServiceImpl implements MemberService {
 
 	@Autowired
-	private MemberMapper memberMapper;
+	private MemberDAO memberDAO;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 	
 	@Override
-	public boolean insertMember(MemberDTO params) {
-		int queryResult = 0;
-		
-		if(params.getEmail() == null) {
-			queryResult = memberMapper.insertMember(params);
-		}else {
-			queryResult = memberMapper.updateMember(params);
-		}
-		return (queryResult == 1)? true : false;
+	public void insertMember(MemberDTO memberDTO) throws Exception {
+		String encodePassword = passwordEncoder.encode(memberDTO.getPassword());
+		memberDTO.setPassword(encodePassword);
+		memberDAO.insertMember(memberDTO);		
 	}
 
 	@Override
-	public MemberDTO getMemberDetail(String email) {
-		return memberMapper.selectMemberDetail(email);
+	public MemberDTO selectMemberDetail(String email) throws Exception {
+		return memberDAO.selectMemberDetail(email);
 	}
 
 	@Override
-	public boolean deleteMember(String email) {
-		int queryResult = 0;
-		MemberDTO member = memberMapper.selectMemberDetail(email);
-		if(member != null && "N".equals(member.getEnabled())) {
-			queryResult = memberMapper.deleteMember(email);
-		}
-		
-		return (queryResult == 1)? true : false;
+	public void updateMember(MemberDTO memberDTO) throws Exception {
+		memberDAO.updateMember(memberDTO);
 	}
 
 	@Override
-	public List<MemberDTO> getMemberList() {
-		List<MemberDTO> memberList = Collections.emptyList();
+	public void deleteMember(String email) throws Exception {
+		memberDAO.deleteMember(email);
 		
-		int memberTotalCount = memberMapper.selectMemberTotalCount();
-		
-		if(memberTotalCount > 0) {
-			memberList = memberMapper.selectMemberList();
-		}
-		
-		return memberList;
 	}
+
+	@Override
+	public List<MemberDTO> selectMemberList() throws Exception {
+		return memberDAO.selectMemberList();
+	}
+
+	@Override
+	public int selectMemberTotalCount() throws Exception {
+		return memberDAO.selectMemberTotalCount();
+	}
+
+	@Override
+	public int login(MemberDTO memberDTO) throws Exception {
+		return memberDAO.login(memberDTO);
+	}
+
+	
 
 }
