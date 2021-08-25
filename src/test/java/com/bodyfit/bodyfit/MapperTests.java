@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.CollectionUtils;
 
+import com.bodyfit.bodyfit.dao.MemberDAO;
 import com.bodyfit.bodyfit.domain.MemberDTO;
-import com.bodyfit.bodyfit.mapper.MemberMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -16,21 +16,20 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class MapperTests {
 
 	@Autowired
-	private MemberMapper memberMapper;
+	private MemberDAO memberMapper;
 	
 	@Test
-	public void testOfInsert() {
+	public void testOfInsert() throws Exception {
 		MemberDTO params = new MemberDTO();
 		params.setEmail("test2@abc.com");
 		params.setNickname("테스터2");
 		params.setPassword("123456578");
 		
-		int result = memberMapper.insertMember(params);
-		System.out.println("결과는 "+result+"입니다.");
+		memberMapper.insertMember(params);
 	}
 	
 	@Test
-	public void testOfSelectDetail() {
+	public void testOfSelectDetail() throws Exception {
 		MemberDTO member = memberMapper.selectMemberDetail("test2@abc.com");
 		try {
 			String memberJson = new ObjectMapper().writeValueAsString(member);
@@ -43,15 +42,15 @@ public class MapperTests {
 	}
 	
 	@Test
-	public void testOfUpdate() {
+	public void testOfUpdate() throws Exception {
 		MemberDTO params = new MemberDTO();
 		params.setNickname("수정자");
 		params.setPassword("123456789");
 		params.setLevels("free");
 		params.setEnabled("Y");
 		params.setEmail("test2@abc.com");
-		int result = memberMapper.updateMember(params);
-		if(result == 1) {
+		memberMapper.updateMember(params);
+		if(true) {
 			MemberDTO member = memberMapper.selectMemberDetail("test2@abc.com");
 			try {
 				String memberJson = new ObjectMapper().writeValueAsString(member);
@@ -65,9 +64,9 @@ public class MapperTests {
 	}
 	
 	@Test
-	public void testOfDelete() {
-		int result = memberMapper.deleteMember("test2@abc.com");
-		if(result==1) {
+	public void testOfDelete() throws Exception {
+		memberMapper.deleteMember("test2@abc.com");
+		if(true) {
 			MemberDTO member = memberMapper.selectMemberDetail("test2@abc.com");
 			try {
 				String memberJson = new ObjectMapper().writeValueAsString(member);
@@ -81,7 +80,7 @@ public class MapperTests {
 	}
 	
 	@Test
-	public void testSelectList() {
+	public void testSelectList() throws Exception {
 		int memberTotalCount = memberMapper.selectMemberTotalCount();
 		if (memberTotalCount > 0) {
 			List<MemberDTO> memberList = memberMapper.selectMemberList();
