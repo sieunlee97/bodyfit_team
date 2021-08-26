@@ -14,44 +14,31 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-@EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+@EnableWebSecurity //스프링 시큐리티 필터가 스프링 필터 체인에 등록된다.
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
-	@Autowired
-	private DataSource dataSource;
-
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable();
 		http
 			.authorizeRequests()
-				.antMatchers("/", "/account/register","/css/**", "/js/**", "/img/**").permitAll()
+				.antMatchers("/", "/account/**","/css/**", "/js/**", "/img/**").permitAll()
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()
-				.loginPage("/account/login")
+				.loginPage("/account/loginForm") 
+				.loginProcessingUrl("/account/login") //login주소가 호출이 되면 시큐리티가 낚아채서 대신 로그인 진행
+				.defaultSuccessUrl("/")
 				.permitAll()
 				.and()
 			.logout()
 				.permitAll();
 	}
-
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) 
-	  throws Exception {
-	    auth.jdbcAuthentication()
-	      .dataSource(dataSource)
-	      .passwordEncoder(passwordEncoder())
-	      .usersByUsernameQuery("select email, password, enabled "
-	        + "from tbl_member "
-	        + "where email = ?")
-	      .authoritiesByUsernameQuery("select email, levels "
-	        + "from tbl_member "
-	        + "where email = ?");
-	}
-	//Authentication : 로그인(인증)
-	//Authorization : 권한
+	
 	@Bean
-	public PasswordEncoder passwordEncoder() {
+	public BCryptPasswordEncoder passwordEncode() {
 		return new BCryptPasswordEncoder();
 	}
+
+	
 }
