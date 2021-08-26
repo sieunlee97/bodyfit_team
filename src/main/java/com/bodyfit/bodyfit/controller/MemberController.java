@@ -19,6 +19,18 @@ public class MemberController {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
+	@GetMapping(value="/member/boardList")
+	public String boardList() {
+		return "member/boardList";
+		
+	}
+	
+	@GetMapping(value="/member/mypage")
+	public String mypage() {
+		return "member/mypage";
+		
+	}
+
 	@PostMapping(value="/account/register")
 	public String register(User user) {
 		System.out.println(user);

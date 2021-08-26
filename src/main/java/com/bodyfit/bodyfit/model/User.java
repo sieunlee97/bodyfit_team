@@ -1,6 +1,5 @@
 package com.bodyfit.bodyfit.model;
 
-
 import java.sql.Timestamp;
 
 import javax.persistence.Entity;

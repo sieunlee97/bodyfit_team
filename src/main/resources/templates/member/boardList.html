@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{layout/layout}">
+<head>
+<!-- 필요한 CSS, script 추가 영역 -->
+</head>
+<th:block layout:fragment="title">
+	<title>게시판</title>
+</th:block>
+
+<section layout:fragment="content">
+	<div class="container-fluid">
+		<h1>공지사항</h1>
+		<table class="table table-hover mt-5 text-center">
+			<thead>
+				<tr>
+					<th scope="col">번호</th>
+					<th scope="col">제목</th>
+					<th scope="col">작성자</th>
+					<th scope="col">작성일시</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr class="table-light">
+					<th scope="row">Light</th>
+					<td>Column content</td>
+					<td>Column content</td>
+					<td>Column content</td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+</section>
+</html>
