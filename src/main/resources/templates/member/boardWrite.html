@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{layout/layout}">
+<head>
+<!-- 필요한 CSS, script 추가 영역 -->
+</head>
+<th:block layout:fragment="title">
+	<title>게시판</title>
+</th:block>
+
+<section layout:fragment="content">
+	<div class="container-fluid">
+		
+		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+			  <button class="btn btn-primary" type="button">등록</button>
+			</div>
+	</div>
+</section>
+</html>
