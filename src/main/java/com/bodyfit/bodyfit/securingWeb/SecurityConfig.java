@@ -19,20 +19,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.authorizeRequests()
 				.antMatchers("/", "/account/**","/css/**", "/js/**", "/img/**").permitAll()
 				.antMatchers("/member/**").access("hasRole('ROLE_USER')")
-				.anyRequest().authenticated()
-				.and()
-			.formLogin()
-				.loginPage("/account/loginForm") 
-				.loginProcessingUrl("/account/login") //login주소가 호출이 되면 시큐리티가 낚아채서 대신 로그인 진행
-				.defaultSuccessUrl("/")
-				.permitAll()
-				.and()
-			.logout()
-				.permitAll();
+				.anyRequest().authenticated();
+//				.and()
+//			.formLogin()
+//				.loginPage("/account/loginForm") 
+//				.permitAll()
+//				.and()
+//			.logout()
+//				.permitAll();
 	}
 	
 	@Bean
-	public BCryptPasswordEncoder passwordEncode() {
+	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
