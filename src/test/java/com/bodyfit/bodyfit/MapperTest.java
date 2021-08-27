@@ -9,7 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.CollectionUtils;
 
 import com.bodyfit.bodyfit.mapper.MemberMapper;
-import com.bodyfit.bodyfit.model.UserDto;
+import com.bodyfit.bodyfit.model.UserDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -24,7 +24,7 @@ public class MapperTest {
 	
 	@Test
 	public void testOfInsert() throws Exception {
-		UserDto params = new UserDto();
+		UserDTO params = new UserDTO();
 		params.setEmail("testgmail.com");
 		params.setNickname("테스터");
 		params.setPassword("123456578");
@@ -34,7 +34,7 @@ public class MapperTest {
 	
 	@Test
 	public void testOfSelectDetail() throws Exception {
-		UserDto member = memberMapper.selectMemberDetail("test2@abc.com");
+		UserDTO member = memberMapper.selectMemberDetail("test2@abc.com");
 		try {
 			String memberJson = new ObjectMapper().writeValueAsString(member);
 			System.out.println("=============================");
@@ -47,7 +47,7 @@ public class MapperTest {
 	
 	@Test
 	public void testOfUpdate() throws Exception {
-		UserDto params = new UserDto();
+		UserDTO params = new UserDTO();
 		params.setNickname("수정자");
 		params.setPassword("123456789");
 		params.setLevels("ROLE_USER");
@@ -55,7 +55,7 @@ public class MapperTest {
 		params.setEmail("test2@abc.com");
 		memberMapper.updateMember(params);
 		if(true) {
-			UserDto member = memberMapper.selectMemberDetail("test2@abc.com");
+			UserDTO member = memberMapper.selectMemberDetail("test2@abc.com");
 			try {
 				String memberJson = new ObjectMapper().writeValueAsString(member);
 				System.out.println("=============================");
@@ -71,7 +71,7 @@ public class MapperTest {
 	public void testOfDelete() throws Exception {
 		memberMapper.deleteMember("test2@abc.com");
 		if(true) {
-			UserDto member = memberMapper.selectMemberDetail("test2@abc.com");
+			UserDTO member = memberMapper.selectMemberDetail("test2@abc.com");
 			try {
 				String memberJson = new ObjectMapper().writeValueAsString(member);
 				System.out.println("=============================");
@@ -87,9 +87,9 @@ public class MapperTest {
 	public void testSelectList() throws Exception {
 		int memberTotalCount = memberMapper.selectMemberTotalCount();
 		if (memberTotalCount > 0) {
-			List<UserDto> memberList = memberMapper.selectMemberList();
+			List<UserDTO> memberList = memberMapper.selectMemberList();
 			if (CollectionUtils.isEmpty(memberList) == false) {
-				for (UserDto member : memberList) {
+				for (UserDTO member : memberList) {
 						System.out.println("=========================");
 						System.out.println(member.getEmail());
 						System.out.println(member.getNickname());
@@ -103,7 +103,7 @@ public class MapperTest {
 	
 	@Test
 	public void testOfLogin() throws Exception {
-		UserDto params = new UserDto();
+		UserDTO params = new UserDTO();
 		params.setEmail("bodyfit@gamil.com");
 		params.setPassword("1234");
 		

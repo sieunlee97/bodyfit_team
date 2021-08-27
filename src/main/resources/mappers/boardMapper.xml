@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bodyfit.bodyfit.mapper.BoardMapper">
+
+	<update id="updateBoard">
+		update tbl_board set
+		board_type = #{board_type},
+		title=#{title},
+		content=#{content},
+		update_date=now()
+		where bno = #{bno}
+	</update>
+
+	<delete id="deleteBoard">
+		delete from tbl_board where bno = #{bno}
+	</delete>
+
+	<insert id="insertBoard">
+		insert into tbl_board (board_type,title,content,writer,reg_date,like_cnt, dislike_cnt, hidden_yn)
+		values (#{board_type},#{title},#{content},#{writer},now(),0, 0, 'N')
+	</insert>
+
+	<select id="selectBoardDetail" resultType="BoardDTO">
+		select * from tbl_board where bno = #{bno}
+	</select>
+
+	<update id="updateViewCount">
+		update tbl_board set view_count = view_count + 1
+		where bno = #{bno}
+	</update>
+
+	<select id="selectBoardTotalCount" resultType="int">
+		select count(*) from tbl_board
+	</select>
+
+	<select id="selectBoardList" resultType="com.bodyfit.bodyfit.model.BoardDTO">
+		select * from tbl_board order by reg_date desc
+	</select>
+
+
+</mapper>
