@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
+import com.bodyfit.bodyfit.mapper.MemberMapper;
+
 @SpringBootTest
 class BodyfitApplicationTests {
 
@@ -43,4 +45,5 @@ class BodyfitApplicationTests {
 			e.printStackTrace();
 		}
 	}
+	
 }
