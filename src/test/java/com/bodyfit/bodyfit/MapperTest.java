@@ -8,7 +8,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.CollectionUtils;
 
+import com.bodyfit.bodyfit.mapper.BoardMapper;
 import com.bodyfit.bodyfit.mapper.MemberMapper;
+import com.bodyfit.bodyfit.model.BoardDTO;
 import com.bodyfit.bodyfit.model.UserDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -17,10 +19,43 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class MapperTest {
 
 	@Autowired
+	private BoardMapper boardMapper;
+	
+	@Autowired
 	private MemberMapper memberMapper;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	
+	
+	@Test
+	public void testBoardSelectList() throws Exception {
+		int boardTotalList = boardMapper.selectBoardTotalCount();
+		if (boardTotalList > 0) {
+			List<BoardDTO> list = boardMapper.selectBoardList();
+			if (CollectionUtils.isEmpty(list) == false) {
+				for (BoardDTO board : list) {
+						System.out.println("=========================");
+						System.out.println(board.getBno());
+						System.out.println(board.getBoardType());
+						System.out.println(board.getTitle());
+						System.out.println(board.getWriter());
+						System.out.println("=========================");
+				}
+			}
+		}
+	}
+	@Test
+	public void testOfBoardInsert() throws Exception {
+		BoardDTO params = new BoardDTO();
+		params.setBoardType("공지사항");
+		params.setTitle("테스트");
+		params.setContent("테스트");
+		params.setWriter("테스트");		
+		boardMapper.insertBoard(params);
+	}
+	
 	
 	@Test
 	public void testOfInsert() throws Exception {

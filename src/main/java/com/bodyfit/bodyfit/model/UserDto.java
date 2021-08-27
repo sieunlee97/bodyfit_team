@@ -11,10 +11,10 @@ public class UserDTO {
 	private String password;
 	private String enabled;
 	private String levels;
-	private Timestamp reg_date;
-	private Timestamp update_date;
-	private Timestamp last_login_date;
-	private int login_cnt;
+	private Timestamp regDate;
+	private Timestamp updateDate;
+	private Timestamp lastLoginDate;
+	private int loginCnt;
 	
 	
 }

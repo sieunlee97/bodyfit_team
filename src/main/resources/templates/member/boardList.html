@@ -11,7 +11,6 @@
 
 <section layout:fragment="content">
 	<div class="container-fluid">
-		<p></p>
 		<table class="table table-hover mt-5 text-center">
 			<thead>
 				<tr>
@@ -22,14 +21,17 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr class="table-light">
-					<th scope="row">Light</th>
-					<td>Column content</td>
-					<td>Column content</td>
-					<td>Column content</td>
+				<tr class="table-light" th:each="row:${list}">
+					<th scope="row" th:text=${row.bno}></th>
+					<td th:text=${row.title}></td>
+					<td th:text=${row.writer}></td>
+					<td th:text="${row.likeCnt}"></td>
 				</tr>
 			</tbody>
 		</table>
+		<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+			  <a class="btn btn-primary" th:href="@{/member/boardWrite}">등록</a>
+		</div>
 	</div>
 </section>
 </html>

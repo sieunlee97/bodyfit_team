@@ -30,9 +30,14 @@ public class MemberController {
 		
 	}
 	
-
-	@GetMapping(value="/member/boardList")
+	@GetMapping(value="/member/boardWrite")
 	public String boardList(Model model) throws Exception {
+		return "member/boardWrite";
+		
+	}
+	
+	@GetMapping(value="/member/boardList")
+	public String boardList(Model model, BoardDTO board) throws Exception {
 		List<BoardDTO> list = boardService.selectBoardList();
 		model.addAttribute("list", list);
 		return "member/boardList";

@@ -16,15 +16,15 @@ public class BoardService {
 	private BoardMapper boardMapper;
 	
 	public List<BoardDTO> selectBoardList() throws Exception {
-		List<BoardDTO> boardList = Collections.emptyList();
+		List<BoardDTO> list = Collections.emptyList();
 		int boardTotalCount = boardMapper.selectBoardTotalCount();
-		System.out.println("==============================="+boardTotalCount);
+		//System.out.println("==============================="+boardTotalCount);
 
 		if (boardTotalCount > 0) {
-			boardList = boardMapper.selectBoardList();
+			list = boardMapper.selectBoardList();
 		}
-		System.out.println(boardList);
-		return boardList;
+		//System.out.println(boardList);
+		return list;
 	}
 	public int selectBoardTotalCount() throws Exception{
 		return boardMapper.selectBoardTotalCount();
