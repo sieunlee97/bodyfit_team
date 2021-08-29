@@ -48,19 +48,23 @@ public class MemberService {
 		return 1 ;
 	}
 	
-	public boolean login(UserDTO userDto) throws Exception {
-		
-		// 입력한 이메일값을 전달해서 유저 정보 받아옴 = info
-		UserDTO info = memberMapper.selectMemberDetail(userDto.getEmail());
-		// 해당 이메일을 가진 유저의 가입 비밀번호(암호화O)와 입력한 비밀번호 값 비교
-		// passwordEncoder.matches(암호화되기 전 비밀번호,DB에 저장된 암호화된 비밀번호)
-		boolean result = passwordEncoder.matches(userDto.getPassword(),info.getPassword());
-		
-		System.out.println("로그인 결과 : "+info.getPassword());
-		System.out.println("로그인 결과 : "+userDto.getPassword());
-		System.out.println("로그인 결과 : "+result);
-		
-		return result;
+	public UserDTO login(UserDTO userDto){
+		UserDTO result = null;
+		try {
+			// 입력한 이메일값을 전달해서 유저 정보 받아옴 = info
+			UserDTO info = memberMapper.selectMemberDetail(userDto.getEmail());
+			// 해당 이메일을 가진 유저의 가입 비밀번호(암호화O)와 입력한 비밀번호 값 비교
+			// passwordEncoder.matches(암호화되기 전 비밀번호,DB에 저장된 암호화된 비밀번호)
+			boolean match = passwordEncoder.matches(userDto.getPassword(),info.getPassword());
+			if(match == true) {
+				return memberMapper.login(info);
+			}else {
+				throw new Exception();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+			return result;
+		}
 	}
 
 }

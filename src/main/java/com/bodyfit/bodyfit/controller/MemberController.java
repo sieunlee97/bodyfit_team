@@ -2,6 +2,8 @@ package com.bodyfit.bodyfit.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -72,13 +74,16 @@ public class MemberController {
 	}
 	
 	@PostMapping(value="/account/login")
-	public String login(UserDTO user) throws Exception {
-		System.out.println("로그인 post매핑됨"+user);
-		boolean result = memberService.login(user);
-		if(result == true) {
-			return "index";
-		}else {
-			return "account/loginForm";
+	public String login(UserDTO user, HttpSession session, Model model) throws Exception {
+		System.out.println("로그인 post매핑됨");
+		UserDTO result = memberService.login(user);
+		if(result != null) { //로그인 성공
+			session.setAttribute("session_info", result);
+			//String session_email = (String)session.getAttribute("session_info");
+			System.out.println(session);
+			return "redirect:/";
+		}else {				// 로그인 실패
+			return "redirect:/account/loginForm?error";
 		}
 	}
 	

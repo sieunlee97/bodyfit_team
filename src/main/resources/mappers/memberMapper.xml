@@ -13,7 +13,7 @@
 		, levels
 	</sql>
 	
-	<insert id="insertMember" parameterType="UserDto">
+	<insert id="insertMember" parameterType="UserDTO">
 		INSERT INTO tbl_member (
 				<include refid="memberColumns" />
 		)VALUES(
@@ -29,7 +29,7 @@
 		)	
 	</insert>
 	
-	<select id="selectMemberDetail" parameterType="string" resultType="UserDto">
+	<select id="selectMemberDetail" parameterType="string" resultType="UserDTO">
 		SELECT
 			<include refid="memberColumns" />
 		FROM
@@ -38,7 +38,7 @@
 			email = #{email}
 	</select>
 	
-	<update id="updateMember" parameterType="UserDto">
+	<update id="updateMember" parameterType="UserDTO">
 		UPDATE tbl_member
 		SET
 				  update_date = NOW()
@@ -77,8 +77,8 @@
 				enabled = 'Y'
 	</select>
 	
-	<select id="login"  parameterType="UserDto" resultType="boolean">
-		SELECT count(*)
+	<select id="login"  parameterType="UserDTO" resultType="UserDTO">
+		SELECT *
 		FROM tbl_member
 		WHERE email=#{email} AND password =#{password}
 	</select>

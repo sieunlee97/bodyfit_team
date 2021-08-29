@@ -21,7 +21,7 @@ public interface MemberMapper {
 	/*총 멤버 수*/
 	public int selectMemberTotalCount() throws Exception;
 	/*로그인*/
-	public int login(UserDTO userDto) throws Exception;
+	public UserDTO login(UserDTO userDto) throws Exception;
 	/*이메일체크*/
 	public int idCheck(String email) throws Exception;
 }
