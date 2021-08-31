@@ -21,7 +21,7 @@
 </head>
 <body class="text-center">
 	<main class="form-signin">
-		<form th:action="@{/account/login}" method="POST">
+		<form th:action="@{/account/register}" method="POST">
 			<a class="navbar-brand" style="font-size:2rem;font-weight:bold;color: #f4623a;" th:href="@{/}">BODY FIT</a>
 			<div th:if="${param.error}" class="alert alert-danger" role="alert">
             Invalid username and password.

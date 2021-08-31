@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bodyfit.bodyfit.mapper.BoardTypeMapper">
+	<sql id="boardTypeColumns">
+		board_type
+		, reg_date
+		, update_date
+	</sql>
+
+	<insert id="insertBoardType" parameterType="BoardTypeDTO">
+		INSERT INTO 
+			tbl_board_type (
+				<include refid="boardTypeColumns" />
+		)VALUES(
+				#{board_type}
+				, now()
+				, now()
+		)
+	</insert>
+
+	<select id="selectBoardTypeList" resultType="com.bodyfit.bodyfit.model.BoardTypeDTO">
+		SELECT * FROM tbl_board_type
+	</select>
+
+	<select id="selectBoardTypeDetail" parameterType="string" resultType="BoardTypeDTO">
+		SELECT * 
+		FROM 
+				tbl_board_type 
+		WHERE 
+				board_type = #{board_type}
+	</select>
+
+	<update id="updateBoardType" parameterType="BoardTypeDTO">
+		UPDATE 
+				tbl_board_type
+		SET
+				board_type = #{board_type},
+				update_date = now()
+		WHERE 
+				board_type = ${board_type}
+	</update>
+
+	<delete id="deleteBoardType" parameterType="string">
+		DELETE 
+		FROM 
+				tbl_board_type 
+		WHERE 
+				board_type = #{board_type}
+	</delete>
+
+</mapper>
