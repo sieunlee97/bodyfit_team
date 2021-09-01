@@ -11,14 +11,36 @@
 	<title>게시판</title>
 </th:block>
 <section layout:fragment="content">
-	<div class="container" style="padding-top: 6rem;">
+	<div class="container" style="padding-top: 6rem; padding-bottom:4rem;">
 		<div class="container-fluid">
 			<ul class="nav nav-tabs">
-				<li class="nav-item" th:each="type:${board_type}">
-					<a class="nav-link" href="#" th:text="${type.boardType}"></a>
-				</li>
+				<li class="nav-item" th:each="type:${board_type}"><a
+					class="nav-link" href="#" th:text="${type.boardType}"></a></li>
 			</ul>
-			<table class="table table-hover text-center">
+			
+			<!-- <div class="row">
+			<div class="col-4">
+			<div class="input-group mb-3 mt-3" >
+				<select class="form-select">
+					<option selected>-전체-</option>
+					<option value="1">제목</option>
+					<option value="2">작성자</option>
+				</select> 
+				<input type="text" class="form-control" placeholder="검색어를 입력하세요.">
+				<button class="btn btn-outline-secondary" type="button"
+					id="button-addon2">검색</button>
+			</div>
+			</div>
+			<div class="col-3 justify-content-md-end mb-3 mt-3">
+			<select class="form-select form-control">
+					<option selected>-정렬-</option>
+					<option value="1">최신순</option>
+					<option value="2">좋아요순</option>
+			</select>
+			</div>
+			</div>
+		</div> -->
+		<table class="table table-hover text-center">
 				<thead>
 					<tr>
 						<th scope="col">번호</th>
@@ -30,18 +52,32 @@
 				</thead>
 				<tbody>
 					<tr class="table-warning" th:each="row:${list}">
-						<th scope="row" th:if="${row.boardType}=='notice'" th:text=${row.bno}></th>
-						<td th:if="${row.boardType}=='notice'" ><a th:href="@{/member/boardView(bno=${row.bno})}"th:text=${row.title} ></a></td>
-						<td th:if="${row.boardType}=='notice'" th:text=${row.writer}></td>
-						<td th:if="${row.boardType}=='notice'" th:text="${row.likeCnt}"></td>
-						<td th:if="${row.boardType}=='notice'" th:text="${row.regDate}"></td>
+						<th scope="row" th:text=${row.bno}></th>
+						<td><a th:href="@{/member/boardView( bno=${row.bno} )}" th:text=${row.title}></a></td>
+						<td th:text=${row.writer}></td>
+						<td th:text="${row.likeCnt}"></td>
+						<td th:text="${row.regDate}"></td>
 					</tr>
 				</tbody>
 			</table>
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 				<a class="btn btn-primary" th:href="@{/member/boardRegister}">등록</a>
 			</div>
+			<th:block layout:fragment="paging">
+				<nav th:replace="fragments/common :: pagination"></nav>
+			</th:block>
 		</div>
 	</div>
 </section>
+<th:block layout:fragment="script">
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+
+			function movePage(uri, queryString) {
+				location.href = uri + queryString;
+			}
+			
+			/*]]>*/
+		</script>
+	</th:block>
 </html>

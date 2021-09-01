@@ -2,20 +2,20 @@ package com.bodyfit.bodyfit.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bodyfit.bodyfit.model.BoardDTO;
 import com.bodyfit.bodyfit.model.BoardTypeDTO;
 import com.bodyfit.bodyfit.model.UserDTO;
+import com.bodyfit.bodyfit.paging.Criteria;
 import com.bodyfit.bodyfit.service.BoardService;
 import com.bodyfit.bodyfit.service.BoardTypeService;
 import com.bodyfit.bodyfit.service.MemberService;
@@ -93,10 +93,9 @@ public class MemberController {
 	}
 	
 	@GetMapping(value="/member/boardList")
-	public String boardList(Model model, BoardDTO board, BoardTypeDTO boardTypeDTO) throws Exception {
-		List<BoardDTO> list = boardService.selectBoardList();
+	public String boardList(@ModelAttribute("params") BoardDTO boardDTO, Model model, BoardTypeDTO boardTypeDTO) throws Exception {
+		List<BoardDTO> list = boardService.selectBoardList(boardDTO);
 		model.addAttribute("list", list);
-
 	    
 		List<BoardTypeDTO> board_type = boardTypeService.selectBoardTypeList();
 		model.addAttribute("board_type", board_type);

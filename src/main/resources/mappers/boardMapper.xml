@@ -29,12 +29,19 @@
 		where bno = #{bno}
 	</update>
 
-	<select id="selectBoardTotalCount" resultType="int">
+	<select id="selectBoardTotalCount" parameterType="BoardDTO" resultType="int">
 		select count(*) from tbl_board
 	</select>
 
-	<select id="selectBoardList" resultType="com.bodyfit.bodyfit.model.BoardDTO">
-		select * from tbl_board order by bno desc
+	<select id="selectBoardList" parameterType="BoardDTO" resultType="BoardDTO">
+		SELECT 
+				* 
+		FROM 
+				tbl_board 
+		ORDER BY 
+				bno DESC 
+		LIMIT 
+				#{paginationInfo.firstRecordIndex}, #{recordsPerPage}
 	</select>
 
 

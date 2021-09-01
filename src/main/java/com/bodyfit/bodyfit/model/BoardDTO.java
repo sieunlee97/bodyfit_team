@@ -3,9 +3,13 @@ package com.bodyfit.bodyfit.model;
 import java.time.LocalDateTime;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-public class BoardDTO {
+
+@Getter
+@Setter
+public class BoardDTO extends CommonDTO {
 	/*글번호(PK)*/
 	private Integer bno;
 	/*게시판 카테고리(PK)*/

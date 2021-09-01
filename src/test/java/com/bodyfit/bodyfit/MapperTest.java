@@ -29,23 +29,16 @@ public class MapperTest {
 	
 	
 	
-	@Test
-	public void testBoardSelectList() throws Exception {
-		int boardTotalList = boardMapper.selectBoardTotalCount();
-		if (boardTotalList > 0) {
-			List<BoardDTO> list = boardMapper.selectBoardList();
-			if (CollectionUtils.isEmpty(list) == false) {
-				for (BoardDTO board : list) {
-						System.out.println("=========================");
-						System.out.println(board.getBno());
-						System.out.println(board.getBoardType());
-						System.out.println(board.getTitle());
-						System.out.println(board.getWriter());
-						System.out.println("=========================");
-				}
-			}
-		}
-	}
+	/*
+	 * @Test public void testBoardSelectList() throws Exception { int boardTotalList
+	 * = boardMapper.selectBoardTotalCount(); if (boardTotalList > 0) {
+	 * List<BoardDTO> list = boardMapper.selectBoardList(); if
+	 * (CollectionUtils.isEmpty(list) == false) { for (BoardDTO board : list) {
+	 * System.out.println("=========================");
+	 * System.out.println(board.getBno()); System.out.println(board.getBoardType());
+	 * System.out.println(board.getTitle()); System.out.println(board.getWriter());
+	 * System.out.println("========================="); } } } }
+	 */
 	@Test
 	public void testOfBoardInsert() throws Exception {
 		BoardDTO params = new BoardDTO();
