@@ -30,7 +30,13 @@
 	</update>
 
 	<select id="selectBoardTotalCount" parameterType="BoardDTO" resultType="int">
-		select count(*) from tbl_board
+		SELECT 
+				count(*) 
+		FROM 	
+				tbl_board
+		WHERE
+				1=1
+				<include refid="mappers.commonMapper.search" />
 	</select>
 
 	<select id="selectBoardList" parameterType="BoardDTO" resultType="BoardDTO">
@@ -38,10 +44,12 @@
 				* 
 		FROM 
 				tbl_board 
+		WHERE
+				1=1
+				<include refid="mappers.commonMapper.search" />
 		ORDER BY 
 				bno DESC 
-		LIMIT 
-				#{paginationInfo.firstRecordIndex}, #{recordsPerPage}
+				<include refid="mappers.commonMapper.paging" />
 	</select>
 
 

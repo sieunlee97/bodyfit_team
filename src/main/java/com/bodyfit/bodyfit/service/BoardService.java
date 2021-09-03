@@ -19,14 +19,16 @@ public class BoardService {
 	
 	public List<BoardDTO> selectBoardList(BoardDTO boardDTO) throws Exception {
 		List<BoardDTO> list = Collections.emptyList();
+		int boardTotalCount = 0;
 		
-		int boardTotalCount = boardMapper.selectBoardTotalCount(boardDTO);
-		
-		System.out.println("==============================="+boardTotalCount);
+		try {
+			boardTotalCount = boardMapper.selectBoardTotalCount(boardDTO);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 		PaginationInfo paginationInfo = new PaginationInfo(boardDTO);
 		paginationInfo.setTotalRecordCount(boardTotalCount);
-		System.out.println("==============================="+ paginationInfo.getTotalRecordCount());
 		
 		boardDTO.setPaginationInfo(paginationInfo);
 		
@@ -36,6 +38,7 @@ public class BoardService {
 		//System.out.println(boardList);
 		return list;
 	}
+	
 	public int selectBoardTotalCount(BoardDTO boardDTO) throws Exception{
 		return boardMapper.selectBoardTotalCount(boardDTO);
 	}
