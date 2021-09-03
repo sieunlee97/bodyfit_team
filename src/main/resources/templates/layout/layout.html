@@ -1,36 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no">
-<meta name="description" content="">
-<meta name="author" content="">
- 	<link
-		href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
-		rel="stylesheet"
-		integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
-		crossorigin="anonymous">
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
-		crossorigin="anonymous"></script>
-	<script th:src="@{/js/bootstrap.min.js}"></script>
-	<script th:src="@{/js/jquery.min.js}"></script>
-	<link th:href="@{/css/styles.css}" rel="stylesheet">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
-	<script th:src="@{/js/scripts.js}"></script>
-	<script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-	<link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic" rel="stylesheet" type="text/css">
-	<style type="text/css"> 
-a { text-decoration:none; color:black;} 
-</style> 
-</head>
+<head th:replace="fragments/header :: main-head"> </head>
 	<body id="page-top">
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav" style="background-color:#ffc107;">
@@ -41,11 +12,11 @@ a { text-decoration:none; color:black;}
                     <ul class="navbar-nav ms-auto my-2 my-lg-0" >
                     	<li class="nav-item"><a class="nav-link" th:href="@{/inbody/main}">인바디</a></li>
                     	<li class="nav-item"><a class="nav-link" href="#about">식단</a></li>
-                        <li class="nav-item"><a class="nav-link" th:href="@{/member/boardList}">게시판</a></li>
+                        <li class="nav-item"><a class="nav-link" th:href="@{/board/boardList}">게시판</a></li>
                         <li th:if="${session.session_info} != null" class="nav-item"><a class="nav-link" th:href="@{/member/mypage}">마이페이지</a></li>
                         <li th:if="${session.session_info} == null" class="nav-item"><a class="nav-link" th:href="@{/account/loginForm}">로그인</a></li>
                         <li th:if="${session.session_info} == null" class="nav-item"><a class="nav-link" th:href="@{/account/registerForm}">회원가입</a></li>
-                        <li th:if="${session.session_info} != null" class="nav-item"><button class="nav-link">로그아웃</button></li>
+                        <li th:if="${session.session_info} != null" class="nav-item"><a class="nav-link" th:href="@{/member/logout}">로그아웃</a></li>
                         </th:if>
                     </ul>
                 </div>
