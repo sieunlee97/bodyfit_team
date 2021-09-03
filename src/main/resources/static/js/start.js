@@ -1,4 +1,3 @@
-
 function goOne() {
 	main.style.WebkitAnimation = "fadeOut 1s";
 	main.style.animation = "fadeOut 1s";
@@ -11,7 +10,6 @@ function goOne() {
 		}, 450)
 	}, 450);
 }
-
 function goTwo() {
 	q1.style.WebkitAnimation = "fadeOut 1s";
 	q1.style.animation = "fadeOut 1s";
@@ -24,7 +22,6 @@ function goTwo() {
 		}, 450)
 	}, 450);
 }
-
 function goThree() {
 	q2.style.WebkitAnimation = "fadeOut 1s";
 	q2.style.animation = "fadeOut 1s";
@@ -82,6 +79,91 @@ function goSeven() {
 		setTimeout(() => {
 			q6.style.display = "none";
 			q7.style.display = "block"
+		}, 450)
+	}, 450);
+}
+
+function backMain() {
+	q1.style.WebkitAnimation = "fadeOut 1s";
+	q1.style.animation = "fadeOut 1s";
+	setTimeout(() => {
+		main.style.WebkitAnimation = "fadeIn 1s";
+		main.style.animation = "fadeIn 1s";
+		setTimeout(() => {
+			q1.style.display = "none";
+			main.style.display = "block"
+		}, 450)
+	}, 450);
+}
+function backOne() {
+	q2.style.WebkitAnimation = "fadeOut 1s";
+	q2.style.animation = "fadeOut 1s";
+	setTimeout(() => {
+		q1.style.WebkitAnimation = "fadeIn 1s";
+		q1.style.animation = "fadeIn 1s";
+		setTimeout(() => {
+			q2.style.display = "none";
+			q1.style.display = "block"
+		}, 450)
+	}, 450);
+}
+function backTwo() {
+	q3.style.WebkitAnimation = "fadeOut 1s";
+	q3.style.animation = "fadeOut 1s";
+	setTimeout(() => {
+		q2.style.WebkitAnimation = "fadeIn 1s";
+		q2.style.animation = "fadeIn 1s";
+		setTimeout(() => {
+			q3.style.display = "none";
+			q2.style.display = "block"
+		}, 450)
+	}, 450);
+}
+function backThree() {
+	q4.style.WebkitAnimation = "fadeOut 1s";
+	q4.style.animation = "fadeOut 1s";
+	setTimeout(() => {
+		q3.style.WebkitAnimation = "fadeIn 1s";
+		q3.style.animation = "fadeIn 1s";
+		setTimeout(() => {
+			q4.style.display = "none";
+			q3.style.display = "block"
+		}, 450)
+	}, 450);
+}
+function backFour() {
+	q5.style.WebkitAnimation = "fadeOut 1s";
+	q5.style.animation = "fadeOut 1s";
+	setTimeout(() => {
+		q4.style.WebkitAnimation = "fadeIn 1s";
+		q4.style.animation = "fadeIn 1s";
+		setTimeout(() => {
+			q5.style.display = "none";
+			q4.style.display = "block"
+		}, 450)
+	}, 450);
+}
+function backFive() {
+	q6.style.WebkitAnimation = "fadeOut 1s";
+	q6.style.animation = "fadeOut 1s";
+	setTimeout(() => {
+		q5.style.WebkitAnimation = "fadeIn 1s";
+		q5.style.animation = "fadeIn 1s";
+		setTimeout(() => {
+			q6.style.display = "none";
+			q5.style.display = "block"
+		}, 450)
+	}, 450);
+}
+function backSix() {
+	q7.style.WebkitAnimation = "fadeOut 1s";
+	q7.style.animation = "fadeOut 1s";
+	setTimeout(() => {
+		q6.style.WebkitAnimation = "fadeIn 1s";
+		q6.style.animation = "fadeIn 1s";
+		setTimeout(() => {
+			q7.style.display = "none";
+			q6.style.display = "block"
 		}, 450)
 	}, 450);
 }

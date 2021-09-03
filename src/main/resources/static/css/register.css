@@ -1,0 +1,39 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #ffffff;
+}
+
+.form-register {
+  width: 80%;
+  max-width: 500px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-register p {
+	text-align:left;
+	color:#f4623a;
+	font-weight:bold;
+	margin-bottom:3px;
+}
+
+.form-register .checkbox {
+  font-weight: 400;
+}
+
+.form-register .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-register input {
+  margin-bottom:15px;
+}
+
