@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{layout/layout}">
+<head>
+<!-- 필요한 CSS, script 추가 영역 -->
+</head>
+<th:block layout:fragment="title">
+	<title>게시판</title>
+</th:block>
+
+<section layout:fragment="content">
+	<div class="container" style="padding-top: 6rem;">
+	<div class="container-fluid">
+		<form th:action="@{/board/boardRegister}" th:object="${board}" method="POST">
+		<input type="hidden" th:if="*{bno != null and bno > 0}" th:field="*{bno}" />
+			<div class="mb-3">
+			  <label for="title" class="form-label">제목</label>
+			  <input th:field="*{title}" type="text" class="form-control" name="title" id="title" placeholder="">
+			</div>
+			<div class="mb-3">
+			  <label for="writer" class="form-label">작성자</label>
+			  <input th:field="*{writer}" type="text" class="form-control" name="writer" id="writer" placeholder="">
+			</div>
+			<div class="mb-3">
+			  <label for="content" class="form-label">내용</label>
+			  <textarea th:field="*{content}" class="form-control" name="content" id="content" rows="3"></textarea>
+			</div>
+			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+				<button class="btn btn-primary" type="submit">등록</button>
+				<a class="btn btn-primary" th:href="@{/board/boardList}">취소</a>
+			</div>
+		</form>
+	</div>
+	</div>
+</section>
+<th:block layout:fragment="script">
+		<script th:inline="javascript">
+			/*<![CDATA[*/
+
+			function registerBoard(form) {
+				var result = (
+						   isValid(form.title, "제목", null, null)
+						&& isValid(form.writer, "이름", null, null)
+						&& isValid(form.content, "내용", null, null)
+				);
+
+				if ( result == false ) {
+					return false;
+				}
+			}
+			/*[- end of function -]*/
+
+			/*]]>*/
+		</script>
+	</th:block>
+</html>

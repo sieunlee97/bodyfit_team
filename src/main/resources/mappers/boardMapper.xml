@@ -2,20 +2,22 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.bodyfit.bodyfit.mapper.BoardMapper">
 
-	<update id="updateBoard">
-		update tbl_board set
-		board_type = #{boardType},
-		title=#{title},
-		content=#{content},
-		update_date=now()
-		where bno = #{bno}
+	<update id="updateBoard" parameterType="BoardDTO">
+		UPDATE 
+				tbl_board 
+		SET
+				board_type = #{boardType},
+				title=#{title},
+				content=#{content},
+				update_date=now()
+				where bno = #{bno}
 	</update>
 
 	<delete id="deleteBoard">
 		delete from tbl_board where bno = #{bno}
 	</delete>
 
-	<insert id="insertBoard">
+	<insert id="insertBoard" parameterType="BoardDTO">
 		insert into tbl_board (board_type,title,content,writer,reg_date,like_cnt, dislike_cnt, hidden_yn)
 		values (#{boardType},#{title},#{content},#{writer},now(),0, 0, 'N')
 	</insert>
