@@ -25,7 +25,7 @@ public class MemberService {
 	}
 
 	public UserDTO selectMemberDetail(String email) throws Exception {
-		return null;
+		return memberMapper.selectMemberDetail(email);
 	}
 
 	public void updateMember(UserDTO userDto) throws Exception {

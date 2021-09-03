@@ -8,14 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.bodyfit.bodyfit.model.BoardDTO;
-import com.bodyfit.bodyfit.model.BoardTypeDTO;
 import com.bodyfit.bodyfit.model.UserDTO;
-import com.bodyfit.bodyfit.paging.Criteria;
 import com.bodyfit.bodyfit.service.BoardService;
 import com.bodyfit.bodyfit.service.BoardTypeService;
 import com.bodyfit.bodyfit.service.MemberService;
@@ -35,77 +34,19 @@ public class MemberController {
 	
 	
 	@GetMapping(value="/")
-	public String home(Model model,BoardTypeDTO boardTypeDTO) throws Exception {
+	public String home(Model model) throws Exception {
 
 		return "index";
 		
 	}
-// 게시판 ==============================================================================	
-	@PostMapping(value = "/member/boardDelete")
-	public String boardDelete(@RequestParam(value = "bno", required = false) Integer bno) throws Exception {
-		System.out.println(bno);
-		if (bno == null) {
-			// TODO => 올바르지 않은 접근이라는 메시지를 전달하고, 게시글 리스트로 리다이렉트
-			return "redirect:/member/boardList";
-		}
-		boardService.deleteBoard(bno);
-		return "redirect:/member/boardList";
-	}
-	
-	
-	@GetMapping(value="/member/boardView")
-	public String boardView(@RequestParam(value="bno", required=false) Integer bno, Model model) throws Exception{
-		//System.out.println(bno);
-		if(bno==null) {
-			return "redirect:/member/boardList";
-		}
-		BoardDTO board = boardService.selectBoardDetail(bno);
-		model.addAttribute("board", board);
-		return "member/boardView";
-	}
-	
-	
-	
-	@PostMapping(value="/member/boardRegister")
-	public String boardWrite(BoardDTO boardDTO) throws Exception{		
-
-		if(boardDTO.getWriter() == null) {
-			boardDTO.setWriter("작성자");
-		}
-		boardDTO.setBoardType("notice");
-		boardService.insertBoard(boardDTO);
-		return "redirect:/member/boardList";
-	}
-	
-	@GetMapping(value="/member/boardRegister")
-	public String boardRegister(@RequestParam(value="bno", required=false) Integer bno, Model model) throws Exception {
-		if(bno == null) {
-			model.addAttribute("board",new BoardDTO());
-		}else {
-			BoardDTO board = boardService.selectBoardDetail(bno);
-			if(board == null) {
-				return "redirect:/member/boardList";
-			}
-			model.addAttribute("board", board);
-		}
-		return "member/boardWrite";
-		
-	}
-	
-	@GetMapping(value="/member/boardList")
-	public String boardList(@ModelAttribute("params") BoardDTO boardDTO, Model model, BoardTypeDTO boardTypeDTO) throws Exception {
-		List<BoardDTO> list = boardService.selectBoardList(boardDTO);
-		model.addAttribute("list", list);
-	    
-		List<BoardTypeDTO> board_type = boardTypeService.selectBoardTypeList();
-		model.addAttribute("board_type", board_type);
-		return "member/boardList";
-		
-	}
-	
 // 마이페이지 ==============================================================================
 	@GetMapping(value="/member/mypage")
-	public String mypage() {
+	public String mypage(HttpSession session, UserDTO user, Model model) throws Exception {
+		System.out.println("마이페이지");
+		//마이페이지는 로그인 상태만 접근 가능하기 때문에, 로그인 세션변수를 로그인아이디 변수 session_userid
+		UserDTO loginUser = (UserDTO) session.getAttribute("session_info");
+		System.out.println("loginUser="+loginUser.getEmail());
+		model.addAttribute("loginUser", loginUser);
 		return "member/mypage";
 		
 	}
@@ -123,6 +64,20 @@ public class MemberController {
 		return "redirect:/account/loginForm";
 	}
 	
+	
+	@RequestMapping(value="/account/email_check", method=RequestMethod.GET)
+	@ResponseBody
+	public String email_check(@RequestParam("email") String email) {
+		String result="0";
+		try {
+			UserDTO userDTO = memberService.selectMemberDetail(email);
+			if(userDTO != null) {result="1";} // 아이디 중복값이 있을 경우
+			else {result="0";} // 아이디 중복값이 없을 경우
+		} catch (Exception e) {
+			result=e.toString();
+		}
+		return result; // 결과값은 0, 1, 또는 에러메세지 중 한가지
+	}
 // 로그인 ==============================================================================
 	@GetMapping(value="/account/loginForm")
 	public String login(Model model) {
@@ -134,9 +89,9 @@ public class MemberController {
 	@PostMapping(value="/account/login")
 	public String login(UserDTO user, HttpSession session, Model model) throws Exception {
 		System.out.println("로그인 post매핑됨");
-		UserDTO result = memberService.login(user);
-		if(result != null) { //로그인 성공
-			session.setAttribute("session_info", result);
+		UserDTO loginUser = memberService.login(user);
+		if(loginUser != null) { //로그인 성공
+			session.setAttribute("session_info", loginUser);
 			//String session_email = (String)session.getAttribute("session_info");
 			System.out.println(session);
 			return "redirect:/";

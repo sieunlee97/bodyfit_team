@@ -39,12 +39,13 @@ a { text-decoration:none; color:black;}
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto my-2 my-lg-0" >
-                    	<li class="nav-item"><a class="nav-link" href="#about">인바디</a></li>
+                    	<li class="nav-item"><a class="nav-link" th:href="@{/inbody/main}">인바디</a></li>
                     	<li class="nav-item"><a class="nav-link" href="#about">식단</a></li>
                         <li class="nav-item"><a class="nav-link" th:href="@{/member/boardList}">게시판</a></li>
-                        <li th:if="${session_info} != null" class="nav-item"><a class="nav-link" th:href="@{/member/mypage}">마이페이지</a></li>
-                        <li th:if="${session_info} == null" class="nav-item"><a class="nav-link" th:href="@{/account/loginForm}">로그인</a></li>
-                        <li th:if="${session_info} == null" class="nav-item"><a class="nav-link" th:href="@{/account/registerForm}">회원가입</a></li>
+                        <li th:if="${session.session_info} != null" class="nav-item"><a class="nav-link" th:href="@{/member/mypage}">마이페이지</a></li>
+                        <li th:if="${session.session_info} == null" class="nav-item"><a class="nav-link" th:href="@{/account/loginForm}">로그인</a></li>
+                        <li th:if="${session.session_info} == null" class="nav-item"><a class="nav-link" th:href="@{/account/registerForm}">회원가입</a></li>
+                        <li th:if="${session.session_info} != null" class="nav-item"><button class="nav-link">로그아웃</button></li>
                         </th:if>
                     </ul>
                 </div>
