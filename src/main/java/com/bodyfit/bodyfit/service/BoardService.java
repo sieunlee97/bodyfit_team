@@ -52,6 +52,7 @@ public class BoardService {
 		boardMapper.insertBoard(boardDTO);
 	}
 	public void deleteBoard(Integer bno) throws Exception{
+		System.out.println("boardService"+bno);
 		boardMapper.deleteBoard(bno);
 	}
 	public void updateBoard(BoardDTO boardDTO) throws Exception{

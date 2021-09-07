@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="fragments/header :: main-head"></head>
+<body>
+	<form th:if="${not #maps.isEmpty( params )}" name="dataForm" th:action="${redirectUri}" th:method="${method}" style="display: none;">
+			<input th:each="key, status : ${params.keySet()}" type="hidden" th:name="${key}" th:value="${params.get(key)}" />
+	</form>
+
+		<script th:src="@{/scripts/common.js}"></script>
+
+		<th:block layout:fragment="script">
+			<script th:inline="javascript">
+			/* <![CDATA[ */
+
+				window.onload = function() {
+					var message = /*[[ ${message} ]]*/null;
+					//컨트롤러에서 전달받은 메시지가 비어있지 않으면 Alert 메시지 보여준다.
+					if (isEmpty(message) == false) {
+						alert(message);
+					}
+					// 
+					var params = /*[[ ${params} ]]*/null;
+					if (isEmpty(params) == false) { // params 비어있지 않으면 폼을 컨트롤러로 submit
+						document.dataForm.submit();
+					} else { //params 가 비어있으면 redirectUri에 지정된 URI 호출
+						var redirectUri = /*[[ ${redirectUri} ]]*/null;
+						location.href = redirectUri;
+					}
+				}
+				/*[- end of onload -]*/
+
+			/* ]]> */
+			</script>
+		</th:block>
+</body>
+</html>

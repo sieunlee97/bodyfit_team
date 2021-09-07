@@ -1,5 +1,8 @@
 package com.bodyfit.bodyfit.paging;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -43,6 +46,4 @@ public class Criteria {
 
 		return uriComponents.toUriString();
 	}
-
-	
 }
