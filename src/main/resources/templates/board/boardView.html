@@ -33,11 +33,12 @@
 					<textarea th:field="*{content}" class="form-control" name="content"
 						id="content" rows="3" readonly></textarea>
 				</div>
-				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-					<a th:href="|@{/board/boardList}*{makeQueryString(currentPageNo)}|" class="btn btn-warning"
+				<div class="d-grid gap-2 d-md-flex justify-content-md-end" th:object="${params}">
+					<a th:href="|@{/board/listNotice}*{makeQueryString(currentPageNo)}|" class="btn btn-warning"
 						type="button">이전</a>
-					<a class="btn btn-primary" th:href="|@{/board/boardUpdate}*{makeQueryString(currentPageNo)}&bno=${board.bno}|">수정</a>
-					<button type="button" class="btn btn-secondary" th:onclick="deleteBoard([[ ${board.bno} ]],[[ *{makeQueryString(currentPageNo)} ]] )">삭제</button>
+						<a th:if="${loginUser.nickname} == ${board.writer}"  class="btn btn-primary" th:href="|@{/board/boardUpdate}*{makeQueryString(currentPageNo)}&bno=${board.bno}|">수정</a>
+						<button th:if="${loginUser.nickname} == ${board.writer}" type="button" class="btn btn-secondary" th:onclick="deleteBoard([[ ${board.bno} ]],[[ *{makeQueryString(currentPageNo)} ]] )">삭제</button>
+					</th:if>
 				</div>
 			</form>
 		</div>
@@ -47,7 +48,7 @@
 		<script th:inline="javascript">
 			/*<![CDATA[*/
 
-			function deleteBoard(bno) {
+			function deleteBoard(bno, queryString) {
 				if (confirm(bno + "번 게시글을 삭제할까요?")) {
 					var uri = /*[[ @{/board/boardDelete} ]]*/null;
 					var html = "";

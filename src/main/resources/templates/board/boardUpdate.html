@@ -13,8 +13,7 @@
 	<div class="container" style="padding-top: 6rem;">
 		<div class="container-fluid">
 			<form th:action="@{/board/boardUpdate}" th:object="${board}" method="POST" id="dataForm" >
-			<input type="hidden" th:if="*{bno != null and bno > 0}" th:field="*{bno}" />
-			<input type="hidden" th:field="*{boardType}" />
+			<input type="hidden" th:if="*{bno != null and bno > 0}" th:field="*{bno}" />		
 				<div class="mb-3">
 					<label for="title" class="form-label">제목</label> <input
 						th:field="*{title}" type="text" class="form-control" name="title"
@@ -34,21 +33,15 @@
 					<textarea th:field="*{content}" class="form-control" name="content"
 						id="content" rows="3" ></textarea>
 				</div>
-				<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-					<a th:href="@{/board/boardList}" class="btn btn-warning"
-						type="button">이전</a>
+				<div class="d-grid gap-2 d-md-flex justify-content-md-end" th:obejct="${params}">
+					<a th:href="|@{/board/boardView}${params.makeQueryString(params.currentPageNo)}&bno=${board.bno}|" class="btn btn-warning">
+					이전</a>
+					<input type="hidden" name="currentPageNo" th:value="${params.currentPageNo}">
 					<button class="btn btn-primary" type="submit">수정</button>
 				</div>
+				
 			</form>
 		</div>
 	</div>
 </section>
-<th:block layout:fragment="script">
-		<script th:inline="javascript">
-			/*<![CDATA[*/
-			/*[- end of function -]*/
-
-			/*]]>*/
-		</script>
-	</th:block>
 </html>

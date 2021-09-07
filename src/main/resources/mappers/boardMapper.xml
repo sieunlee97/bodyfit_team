@@ -6,7 +6,6 @@
 		UPDATE 
 				tbl_board 
 		SET
-				board_type = #{boardType},
 				title=#{title},
 				content=#{content},
 				update_date=now()
