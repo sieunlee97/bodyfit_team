@@ -14,11 +14,6 @@
 <section layout:fragment="content">
 	<div class="container" style="padding-top: 6rem; padding-bottom: 4rem;">
 		<div class="container-fluid">
-			<ul class="nav nav-tabs">
-				<li class="nav-item" th:each="type:${board_type}"><a
-					class="nav-link" href="#" th:text="${type.boardType}"></a></li>
-			</ul>
-
 			<div class="row">
 			<!-- 정렬-->
 			<div class="col-2">
@@ -30,28 +25,25 @@
 			
 			<!-- 검색입력 -->
 			<div class="col-8 px-3" style="margin-left: auto;">
-			<form id="searchForm" th:action="@{/member/boardList}" method="GET" th:onsubmit="return searchBoard(this)" role="form">
+			<form id="searchForm" th:action="@{/board/listNotice}" method="GET" th:onsubmit="return searchBoard(this)" role="form">
 				<input type="hidden" name="currentPageNo" value="1" />
 				<input type="hidden" name="recordsPerPage" th:value="${params.recordsPerPage}" />
 				<input type="hidden" name="pageSize" th:value="${params.pageSize}" />
 				
 				<div class="input-group my-3">
-					<select name="searchType" class="form-select" aria-label="Default select example" style="">
+					<select name="searchType" class="form-select" aria-label="Default select example">
 					  <option value="" th:selected="${#strings.isEmpty(params.searchType)}">전체</option>
 					  <option value="title" th:selected="${#strings.equals(params.searchType, 'title')}">제목</option>
 					  <option value="writer" th:selected="${#strings.equals(params.searchType, 'writer')}">작성자</option>
 					</select>
 					<input id="mainSearchKeyword" name="searchKeyword" type="text" class="form-control" style="width:auto;"
 						placeholder="검색어를 입력하세요." aria-describedby="button-addon2" th:value="${params.searchKeyword}">
-					<button class="btn btn-outline-secondary" type="button" onclick="searchBoard(null)"
-						id="searchBtn">검색</button>
 				</div>
 			</form>
 			
 			</div>
 			
 			</div>
-			
 			<table class="table table-hover text-center">
 				<thead>
 					<tr>
@@ -65,7 +57,9 @@
 				<tbody>
 					<tr class="table-warning" th:each="row:${list}">
 						<th scope="row" th:text=${row.bno}></th>
-						<td><a class="list" th:href="|@{/board/boardView}${params.makeQueryString(params.currentPageNo)}&bno=${row.bno}|"
+						<td><a class="list" th:href="|@{/board/boardView}
+													${params.makeQueryString(params.currentPageNo)}
+													&bno=${row.bno}|"
 							th:text="${row.title}"></a></td>
 						<td th:text="${row.writer}"></td>
 						<td th:text="${row.likeCnt}"></td>
