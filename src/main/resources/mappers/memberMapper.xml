@@ -83,9 +83,9 @@
 		WHERE email=#{email} AND password =#{password}
 	</select>
 	
-	<select id = "idCheck" resultType="int">
-        select count(*) from tbl_member
-     	 where email = #{email}
+	<select id = "nicknameCheck" parameterType="string" resultType="string">
+        select nickname from tbl_member
+     	 where nickname=#{nickname}
     </select>
 
 </mapper>

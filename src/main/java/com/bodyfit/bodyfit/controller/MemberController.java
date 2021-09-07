@@ -1,7 +1,5 @@
 package com.bodyfit.bodyfit.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,14 +12,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bodyfit.bodyfit.constant.Method;
 import com.bodyfit.bodyfit.model.UserDTO;
 import com.bodyfit.bodyfit.service.BoardService;
 import com.bodyfit.bodyfit.service.BoardTypeService;
 import com.bodyfit.bodyfit.service.MemberService;
+import com.bodyfit.bodyfit.util.UIUtil;
 
 
 @Controller
-public class MemberController {
+public class MemberController extends UIUtil {
 	
 	@Autowired
 	private MemberService memberService;
@@ -39,13 +39,20 @@ public class MemberController {
 		return "index";
 		
 	}
+	
+	@GetMapping(value="/member/deleteMember")
+	public String deleteMember(HttpSession session, Model model) throws Exception {
+		UserDTO loginUser = (UserDTO) session.getAttribute("session_info");
+		System.out.println("session_info"+loginUser.getEmail());
+		memberService.deleteMember(loginUser.getEmail());
+		session.invalidate();
+		return showMessageWithRedirect("회원탈퇴가 완료되었습니다.", "/", Method.GET, null, model);
+	}
 // 마이페이지 ==============================================================================
 	@GetMapping(value="/member/mypage")
-	public String mypage(HttpSession session, UserDTO user, Model model) throws Exception {
-		System.out.println("마이페이지");
+	public String mypage(HttpSession session, Model model) throws Exception {
 		//마이페이지는 로그인 상태만 접근 가능하기 때문에, 로그인 세션변수를 로그인아이디 변수 session_userid
 		UserDTO loginUser = (UserDTO) session.getAttribute("session_info");
-		System.out.println("loginUser="+loginUser.getEmail());
 		model.addAttribute("loginUser", loginUser);
 		return "member/mypage";
 		
@@ -64,7 +71,22 @@ public class MemberController {
 		return "redirect:/account/loginForm";
 	}
 	
-	
+	@RequestMapping(value="/account/nickname_check", method=RequestMethod.GET)
+	@ResponseBody
+	public String nickname_check(@RequestParam("nickname") String nickname) {
+		String result = "0";
+		try {
+			String yn = memberService.nicknameCheck(nickname);
+			if( yn == "" || yn == null ){
+				result = "0";
+			} else {
+				result = "1";
+			}
+		} catch (Exception e) {
+			result = e.toString();
+		}
+		return result; // 결과값은 0, 1, 또는 에러메세지 중 한가지
+	}
 	@RequestMapping(value="/account/email_check", method=RequestMethod.GET)
 	@ResponseBody
 	public String email_check(@RequestParam("email") String email) {
@@ -100,4 +122,10 @@ public class MemberController {
 		}
 	}
 	
+// 로그아웃 ==============================================================================	
+	@GetMapping("/account/logout")
+	public String logout(HttpSession session, Model model) {
+		session.invalidate();
+		return showMessageWithRedirect("로그아웃이 완료되었습니다.", "/", Method.GET, null, model);
+	}
 }

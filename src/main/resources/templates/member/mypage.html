@@ -26,7 +26,7 @@
 				<div class="col-md-12 col-lg-8">
 					<div class="col">
 						<h3>계정 정보</h3>
-						<form class="mb-5" action="">
+						<form class="mb-5" name="dataForm">
 							<div class="mb-3 row">
 								<label for="email" class="col-sm-2 col-form-label">이메일</label>
 								<div class="col-sm-10">
@@ -48,22 +48,32 @@
 							</div>
 							<div class="d-grid gap-2 d-md-flex justify-content-md-end">
 								<button class="btn btn-lg btn-primary me-md-2" type="button">수정</button>
-								<button class="btn btn-lg btn-primary" type="button">탈퇴</button>
+								<a class="btn btn-lg btn-primary" th:href="@{/member/deleteMember}">탈퇴</a>
 							</div>
 						</form>
+						
+						<th:block layout:fragment="script">
+						<script th:inline="javascript">
+							/*<![CDATA[*/
+
+							/*[- end of function -]*/
+				
+							/*]]>*/
+						</script>
+					</th:block>
 
 						<h3>신체 정보</h3>
 						<form class="mt-3">
 							<div class="mb-3 row">
 								<label for="nickname" class="col-sm-2 col-form-label">키</label>
 								<div class="col-sm-10">
-									<input type="text" class="form-control" id="nickname">
+									<input type="text" class="form-control" id="height">
 								</div>
 							</div>
 							<div class="mb-3 row">
 								<label for="password" class="col-sm-2 col-form-label">체중</label>
 								<div class="col-sm-10">
-									<input type="password" class="form-control" id="password">
+									<input type="text" class="form-control" id="weight">
 								</div>
 							</div>
 							<div class="d-grid gap-2 d-md-flex justify-content-md-end">

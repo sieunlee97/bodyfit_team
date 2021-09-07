@@ -23,5 +23,5 @@ public interface MemberMapper {
 	/*로그인*/
 	public UserDTO login(UserDTO userDto) throws Exception;
 	/*이메일체크*/
-	public int idCheck(String email) throws Exception;
+	public String nicknameCheck(String nickname) throws Exception;
 }

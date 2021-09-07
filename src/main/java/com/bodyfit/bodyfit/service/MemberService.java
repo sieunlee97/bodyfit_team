@@ -29,23 +29,23 @@ public class MemberService {
 	}
 
 	public void updateMember(UserDTO userDto) throws Exception {
-		
+		memberMapper.updateMember(userDto);
 	}
 
 	public void deleteMember(String email) throws Exception {
-		
+		memberMapper.deleteMember(email);
 	}
 
 	public List<UserDTO> selectMemberList() throws Exception {
-		return null;
+		return memberMapper.selectMemberList();
 	}
 
 	public int selectMemberTotalCount() throws Exception {
-		return 0;
+		return memberMapper.selectMemberTotalCount();
 	}
 
-	public int idCheck(String email) throws Exception{
-		return 1 ;
+	public String nicknameCheck(String nickname) throws Exception{
+		return memberMapper.nicknameCheck(nickname);
 	}
 	
 	public UserDTO login(UserDTO userDto){
