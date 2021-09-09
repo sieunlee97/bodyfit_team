@@ -2,10 +2,12 @@ package com.bodyfit.bodyfit.securingWeb;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
@@ -17,16 +19,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		http
 			.authorizeRequests()
-				.antMatchers("/","/inbody/**","/member/**", "/board/**","/account/**","/css/**", "/js/**", "/img/**").permitAll()
-				//.antMatchers("/member/**").access("hasRole('ROLE_USER')")
-				.anyRequest().authenticated();
-//				.and()
-//			.formLogin()
-//				.loginPage("/account/loginForm") 
-//				.permitAll()
-//				.and()
-//			.logout()
-//				.permitAll();
+				.antMatchers("/", "/diet/**","/member/**", "/board/**","/account/**","/css/**", "/js/**", "/img/**").permitAll()
+				.antMatchers("/inbody/**").hasAuthority("ROLE_USER")
+//				.antMatchers("/**/*Write", "/**/*Update").access("hasRole('ROLE_USER')")
+				.anyRequest().authenticated()
+				.and()
+			.formLogin()
+				.loginPage("/account/loginForm") 
+				.permitAll()
+				.and()
+				.logout()
+				.permitAll();
 	}
 	
 	@Bean

@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bodyfit.bodyfit.constant.Method;
+import com.bodyfit.bodyfit.model.InbodyDTO;
 import com.bodyfit.bodyfit.model.UserDTO;
 import com.bodyfit.bodyfit.service.BoardService;
 import com.bodyfit.bodyfit.service.BoardTypeService;
+import com.bodyfit.bodyfit.service.InbodyService;
 import com.bodyfit.bodyfit.service.MemberService;
 import com.bodyfit.bodyfit.util.UIUtil;
 
@@ -31,6 +33,9 @@ public class MemberController extends UIUtil {
 	
 	@Autowired
 	private BoardTypeService boardTypeService;
+	
+	@Autowired
+	private InbodyService inbodyService;
 	
 	
 	@GetMapping(value="/")
@@ -50,10 +55,13 @@ public class MemberController extends UIUtil {
 	}
 // 마이페이지 ==============================================================================
 	@GetMapping(value="/member/mypage")
-	public String mypage(HttpSession session, Model model) throws Exception {
+	public String mypage(HttpSession session, Model model, InbodyDTO inbodyDTO) throws Exception {
 		//마이페이지는 로그인 상태만 접근 가능하기 때문에, 로그인 세션변수를 로그인아이디 변수 session_userid
 		UserDTO loginUser = (UserDTO) session.getAttribute("session_info");
 		model.addAttribute("loginUser", loginUser);
+		inbodyDTO = inbodyService.selectInbodyDetail(loginUser.getEmail());
+		//System.out.println(inbodyDTO.getHeight());
+		model.addAttribute("inbodyDTO", inbodyDTO);
 		return "member/mypage";
 		
 	}

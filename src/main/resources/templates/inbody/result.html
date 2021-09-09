@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{layout/layout}">
+<head>
+<!-- 필요한 CSS, script 추가 영역 -->
+
+
+<th:block layout:fragment="title">
+	<title>인바디 결과</title>
+</th:block>
+<section layout:fragment="content">
+	<div class="container" style="padding-top: 6rem; padding-bottom: 4rem;">
+		<div class="container-fluid">
+			<h3>기본 정보</h3>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th scope="col">성별</th>
+						<th scope="col">나이</th>
+						<th scope="col">키(cm)</th>
+						<th scope="col">몸무게(kg)</th>
+						<th scope="col">현재체지방률(%)</th>
+						<th scope="col">목표체지방률(%)</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="row:${inbodyDTO}">
+						<th th:text="${row.gender}"></th>
+						<td th:text="${row.age}"></td>
+						<td th:text="${row.height}"></td>
+						<td th:text="${row.weight}"></td>
+						<td th:text="${row.currentFatRate}"></td>
+						<td th:text="${row.targetFatRate}"></td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<h3>BMI(체질량지수)</h3>
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th scope="col">BMI</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="row:${inbodyDTO}">
+						<th th:text="${row.bmi}"></th>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</th:block>
+</html>
