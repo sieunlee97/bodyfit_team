@@ -33,17 +33,19 @@
         <section id="main" class="mx-auto">
             <button type="button" class="btn-text btn btn-lg mx-auto" onclick="js:goOne()">검사 시작하기</button>
         </section>
+        <form th:action="@{/inbody/register}" method="POST" class="inbodyForm" th:object="${inbodyDTO}">
+        <input type="hidden" name="email" th:value="${loginUser.email}" >
         <section id="q1">
             <h2 class="qBox my-5 py-3 mx-auto">1. 성별과 나이를 입력해주세요.</h2>
             <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-              <input type="radio" class="inbody-text btn-check" name="btnradio" id="man" autocomplete="off" checked="">
+              <input type="radio" class="inbody-text btn-check" value="남" name="gender" id="man" autocomplete="off">
               <label class="inbody-text btn btn-outline-primary" style="font-size:3rem;" for="man">남자</label>
-              <input type="radio" class="inbody-text btn-check" name="btnradio" id="woman" autocomplete="off" checked="">
+              <input type="radio" class="inbody-text btn-check" value="여" name="gender" id="woman" autocomplete="off">
               <label class="inbody-text btn btn-outline-primary" style="font-size:3rem;" for="woman">여자</label>
             </div>
             <div class="form-group row my-5 py-3 justify-content-center">
               <div class="col-3">
-                <input class="form-control form-control-lg text-center" min="1" max="100" type="number" value="" name="age" id="age" required/>
+                <input class="form-control form-control-lg text-center" min="1" max="100" type="number" name="age" id="age" required/>
               </div>
               <label class="inbody-text col-1 col-form-label" for="age">세</label>
             </div>
@@ -54,13 +56,13 @@
             <h2 class="qBox my-5 py-3 mx-auto">2. 키와 몸무게를 입력해주세요.</h2>
             <div class="form-group row my-5 py-3 justify-content-center">
               <div class="col-3">
-                <input class="form-control form-control-lg text-center" min="1" max="200" step="0.1" type="number" value="" name="height" id="height" required/>
+                <input class="form-control form-control-lg text-center" min="1" max="200" step="0.1" type="number" name="height" id="height" required/>
               </div>
               <label class="inbody-text col-1 col-form-label" for="age">cm</label>
             </div>
             <div class="form-group row my-5 py-3 justify-content-center">
               <div class="col-3">
-                <input class="form-control form-control-lg text-center" min="1" max="100" step="0.1" type="number" value="" name="weight" id="weight" required/>
+                <input class="form-control form-control-lg text-center" min="1" max="100" step="0.1" type="number" name="weight" id="weight" required/>
               </div>
               <label class="inbody-text col-1 col-form-label" for="age">kg</label>
             </div>
@@ -69,10 +71,10 @@
         </section>
         <section id="q3">
             <h2 class="qBox my-5 py-3 mx-auto">3. 현재 체지방률을 입력해주세요.</h2>
-            <input type="range" min="1" max="100" step="0.1" value="10" oninput="document.getElementById('current_fat_rate').value=this.value;"/>
+            <input type="range" min="1" max="100" step="0.1" value="10" oninput="document.getElementById('currentFatRate').value=this.value;"/>
             <div class="form-group row my-5 py-3 justify-content-center">
               <div class="col-3">
-                <input class="form-control form-control-lg text-center" min="1" max="100" type="text" value="" name="current_fat_rate" id="current_fat_rate" required/>
+                <input class="form-control form-control-lg text-center" min="1" max="100" type="text" name="currentFatRate" id="currentFatRate" required/>
               </div>
               <label class="col-1 col-form-label inbody-text" for="age">%</label>
             </div>
@@ -81,10 +83,10 @@
         </section>
         <section id="q4">
             <h2 class="qBox my-5 py-3 mx-auto">4. 목표 체지방률을 입력해주세요.</h2>
-            <input type="range" min="1" max="100" step="0.1" value="10" oninput="document.getElementById('target_fat_rate').value=this.value;"/>
+            <input type="range" min="1" max="100" step="0.1" value="10" oninput="document.getElementById('targetFatRate').value=this.value;"/>
             <div class="form-group row my-5 py-3 justify-content-center">
               <div class="col-3">
-                <input class="form-control form-control-lg text-center " min="1" max="100" type="text" value="20" name="target_fat_rate" id="target_fat_rate" required/>
+                <input class="form-control form-control-lg text-center " min="1" max="100" type="text" value="20" name="targetFatRate" id="targetFatRate" required/>
               </div>
               <label class="col-1 col-form-label inbody-text" for="age">%</label>
             </div>
@@ -94,14 +96,14 @@
         <section id="q5">
             <h2 class="qBox mb-5 py-3 mx-auto">5. 평소 운동량을 선택해주세요.</h2>
             <div class="btn-group-vertical" style="width:60%;">
-              <input type="radio" class="btn-check " name="btnradio" id="grade1" autocomplete="off" checked="">
-              <label class="inbody-text btn btn-outline-primary" style="font-size:1.5rem;" for="grade1">거의 안 함</label>
-              <input type="radio" class="btn-check" name="btnradio" id="grade2" autocomplete="off" checked="">
-              <label class="inbody-text btn btn-outline-primary" style="font-size:1.5rem;" for="grade2">하루 1-2시간</label>
-              <input type="radio" class="btn-check" name="btnradio" id="grade3" autocomplete="off" checked="">
-              <label class="inbody-text btn btn-outline-primary" style="font-size:1.5rem;" for="grade3">힘든 육체 노동</label>
-              <input type="radio" class="btn-check" name="btnradio" id="grade4" autocomplete="off" checked="">
-              <label class="inbody-text btn btn-outline-primary" style="font-size:1.5rem;" for="grade4">전문 운동 선수</label>
+              <input type="radio" class="btn-check " name="exercise" value="1" id="1" autocomplete="off" >
+              <label class="inbody-text btn btn-outline-primary" style="font-size:1.5rem;" for="1">거의 안 함</label>
+              <input type="radio" class="btn-check" name="exercise" value="2" id="2" autocomplete="off" >
+              <label class="inbody-text btn btn-outline-primary" style="font-size:1.5rem;" for="2">하루 1-2시간</label>
+              <input type="radio" class="btn-check" name="exercise" value="3" id="3" autocomplete="off" >
+              <label class="inbody-text btn btn-outline-primary" style="font-size:1.5rem;" for="3">힘든 육체 노동</label>
+              <input type="radio" class="btn-check" name="exercise" value="4" id="4" autocomplete="off">
+              <label class="inbody-text btn btn-outline-primary" style="font-size:1.5rem;" for="4">전문 운동 선수</label>
             </div>
             <div class="my-5">
             <button type="button" class="btn btn-lg" onclick="js:backFour()">&#10094;</button>
@@ -111,14 +113,14 @@
         <section id="q6">
             <h2 class="qBox mb-5 py-3 mx-auto">6. 다이어트 타입을 선택해주세요.</h2>
             <div class="btn-group-vertical" style="width:60%;">
-              <input type="radio" class="btn-check" name="btnradio" id="a" autocomplete="off" checked="">
-              <label class="inbody-text btn btn-outline-primary" style="font-size:1.5rem;" for="a">A.체중유지</label>
-              <input type="radio" class="inbody-text btn-check" name="btnradio" id="b" autocomplete="off" checked="">
-              <label class="inbody-text btn btn-outline-primary" style="font-size:1.5rem;" for="b">B.완만한 체중 감소</label>
-              <input type="radio" class="inbody-text btn-check" name="btnradio" id="c" autocomplete="off" checked="">
-              <label class="inbody-text btn btn-outline-primary" style="font-size:1.5rem;" for="c">C.빠른 체중 감소</label>
-              <input type="radio" class="inbody-text btn-check" name="btnradio" id="d" autocomplete="off" checked="">
-              <label class="inbody-text btn btn-outline-primary" style="font-size:1.5rem;" for="d">D.완만한 체중 증가</label>
+              <input type="radio" class="inbody-text btn-check" name="dietType" value="A" id="A" autocomplete="off" >
+              <label class="inbody-text btn btn-outline-primary" style="font-size:1.5rem;" for="A">A.체중유지</label>
+              <input type="radio" class="inbody-text btn-check" name="dietType" value="B" id="B" autocomplete="off" >
+              <label class="inbody-text btn btn-outline-primary" style="font-size:1.5rem;" for="B">B.완만한 체중 감소</label>
+              <input type="radio" class="inbody-text btn-check" name="dietType" value="C" id="C" autocomplete="off" >
+              <label class="inbody-text btn btn-outline-primary" style="font-size:1.5rem;" for="C">C.빠른 체중 감소</label>
+              <input type="radio" class="inbody-text btn-check" name="dietType" value="D" id="D" autocomplete="off">
+              <label class="inbody-text btn btn-outline-primary" style="font-size:1.5rem;" for="D">D.완만한 체중 증가</label>
             </div>
             <div class="my-5">
             <button type="button" class="btn btn-lg" onclick="js:backFive()">&#10094;</button>
@@ -129,13 +131,14 @@
             <h2 class="qBox my-5 py-3 mx-auto">7. 목표 기간을 입력해주세요.</h2>
             <div class="form-group row my-5 py-3 justify-content-center">
               <div class="col-3">
-                <input class="form-control form-control-lg text-center" min="1" max="52" type="number" value="" name="week" id="week" required/>
+                <input class="form-control form-control-lg text-center" min="1" max="52" type="number" name="period" id="period" required/>
               </div>
-              <label class="col-1 col-form-label inbody-text" for="week">주</label>
+              <label class="col-1 col-form-label inbody-text" for="period">주</label>
             </div>
             <button type="button" class="btn btn-lg" onclick="js:backSix()">&#10094;</button>
-        	<button type="button" class="btn btn-lg" onclick="js:goResult()">&#10095;</button>
+        	<button type="submit" class="btn btn-lg">결과보기</button>
         </section>
+        </form>
     </div>
 	<script th:src="@{/js/start.js}"></script>
 </body>
