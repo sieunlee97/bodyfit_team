@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{layout/layout}">
+<head>
+<!-- 필요한 CSS, script 추가 영역 -->
+</head>
+<th:block layout:fragment="css">
+<link th:href="@{/css/theme.min.css}" rel="stylesheet">
+</th:block>
+
+<th:block layout:fragment="title">
+	<title>식단</title>
+</th:block>
+<section layout:fragment="content">
+	<div class="container" style="padding-top: 6rem; padding-bottom: 4rem;">
+		<div class="container-fluid">
+
+        <!-- Container fluid -->
+          <div class="row">
+            <div class="col-xl-3 col-lg-6 col-md-12 col-12 mt-3">
+              <!-- card -->
+              <div class="card rounded-3" style="height:150px;">
+                <!-- card body -->
+                <div class="card-body">
+                  <!-- heading -->
+                  <div class="d-flex justify-content-between align-items-center
+                    mb-3">
+                    <div>
+                      <h4 class="mb-0">권장칼로리</h4>
+                    </div>
+                    <div class="icon-shape icon-md bg-light-primary text-primary
+                      rounded-1">
+                    </div>
+                  </div>
+                  <div>
+                    <h1 class="fw-bold">1800</h1>
+                    <p class="mb-0">kcal</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-12 col-12 mt-3">
+              <!-- card -->
+              <div class="card rounded-3" style="height:150px;">
+                <!-- card body -->
+                <div class="card-body">
+                  <!-- heading -->
+                  <div class="d-flex justify-content-between align-items-center
+                    mb-3">
+                    <div>
+                      <h4 class="mb-0">섭취칼로리</h4>
+                    </div>
+                    <div class="icon-shape icon-md bg-light-primary text-primary
+                      rounded-1">
+                    </div>
+                  </div>
+                  <!-- project number -->
+                  <div>
+                    <h1 class="fw-bold">800</h1>
+                    <p class="mb-0">kcal</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-12 col-md-12 col-12 mt-3">
+              <!-- card -->
+              <div class="card rounded-3" style="height:150px;">
+                <!-- card body -->
+                <div class="card-body">
+                  <!-- heading -->
+                  <div class="d-flex justify-content-between align-items-center
+                    mb-3">
+                    <div>
+                      <h4 class="mb-0">섭취영양소</h4>
+                    </div>
+                    <div class="icon-shape icon-md bg-light-primary text-primary
+                      rounded-1">
+                    </div>
+                  </div>
+                  <!-- project number -->
+                  <div>
+                    <p class="mb-0">탄수화물</p>
+                    <p class="mb-0">단백질</p>
+                    <p class="mb-0">지방</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+     </div>
+</section>
+</html>
