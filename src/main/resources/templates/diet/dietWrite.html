@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{layout/layout}">
+<head>
+<!-- 필요한 CSS, script 추가 영역 -->
+<script type="text/javascript" th:src="@{/js/common.js}"></script>
+<link th:href="@{/css/board.css}" rel="stylesheet">
+</head>
+
+<th:block layout:fragment="title">
+	<title>게시판</title>
+</th:block>
+<section layout:fragment="content">
+	<div class="container" style="padding-top: 6rem; padding-bottom: 4rem;">
+		<div class="container-fluid">
+		<div>
+			<h1>식단 입력하기</h1>
+		</div>
+		
+		
+		</div>
+	</div>
+</section>
