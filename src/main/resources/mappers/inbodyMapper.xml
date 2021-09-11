@@ -33,6 +33,17 @@
 		)
 	</insert>
 	
+	<select id="selectInbodyList" resultType="InbodyDTO">
+		SELECT 
+				  inbody_date
+				, current_fat_rate 
+		FROM 
+				tbl_inbody
+		WHERE 
+				email=#{email}
+
+	</select>
+	
 	
 	<select id="selectInbodyDetail" parameterType="string" resultType="InbodyDTO">
 	
@@ -42,6 +53,10 @@
 				tbl_inbody
 		WHERE 
 				email = #{email}
+		ORDER BY 
+				inbody_date desc 
+		limit 
+				1
 	</select>
 
 </mapper>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{layout/layout}">
+<head>
+<!-- 필요한 CSS, script 추가 영역 -->
+<script type="text/javascript" th:src="@{/js/common.js}"></script>
+<link th:href="@{/css/board.css}" rel="stylesheet">
+</head>
+
+<th:block layout:fragment="title">
+	<title>게시판</title>
+</th:block>
+<section layout:fragment="content">
+	<div class="container" style="padding-top: 6rem; padding-bottom: 4rem;">
+		<div class="container-fluid">
+			<table class="table table-hover text-center">
+				<thead>
+					<tr>
+						<th scope="col">날짜</th>
+						<th scope="col">현재체지방률</th>
+					</tr>
+				</thead>
+				<tbody>
+				
+					<tr class="table-warning" th:each="row:${list}">	
+ 						<td th:text="${#dates.format(row.inbodyDate, 'yyyy-MM-dd')}"></td>
+						<td th:text="${row.currentFatRate}"></td>
+					</tr>
+				</tbody>
+			</table>
+	
+			<th:block layout:fragment="paging">
+				<nav th:replace="fragments/common :: pagination"></nav>
+			</th:block>
+
+		</div>
+	</div>
+</section>
+<th:block layout:fragment="script">
+	<script th:inline="javascript">
+		/*<![CDATA[*/
+
+
+
+		/*]]>*/
+	</script>
+</th:block>
+</html>

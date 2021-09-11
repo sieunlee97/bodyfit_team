@@ -1,6 +1,8 @@
 package com.bodyfit.bodyfit.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +11,8 @@ import lombok.Setter;
 @Setter
 public class InbodyDTO {
 	/*인바디 검사 날짜*/
-	private LocalDateTime inbodyDate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Date inbodyDate;
 	/*사용자 이메일*/
 	private String email;
 	/*성별*/
@@ -42,5 +45,5 @@ public class InbodyDTO {
 	private int period;
 	/*평소 운동량*/
 	private String exercise;
-	
+		
 }
