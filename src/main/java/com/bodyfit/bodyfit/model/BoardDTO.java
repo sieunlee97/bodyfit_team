@@ -30,7 +30,15 @@ public class BoardDTO extends CommonDTO {
 	private int dislikeCnt;
 	/*히든글여부*/
 	private String hiddenYn;
+	
+	@Override
+	public String toString() {
+		return "BoardDTO [bno=" + bno + ", boardType=" + boardType + ", title=" + title + ", content=" + content
+				+ ", writer=" + writer + ", regDate=" + regDate + ", updateDate=" + updateDate + ", likeCnt=" + likeCnt
+				+ ", dislikeCnt=" + dislikeCnt + ", hiddenYn=" + hiddenYn + "]";
+	}
 
+	
 
 	
 }

@@ -1,11 +1,13 @@
 package com.bodyfit.bodyfit.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.ParameterizedPreparedStatementSetter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +20,9 @@ import com.bodyfit.bodyfit.model.BoardDTO;
 import com.bodyfit.bodyfit.model.BoardTypeDTO;
 import com.bodyfit.bodyfit.model.UserDTO;
 import com.bodyfit.bodyfit.service.BoardService;
-import com.bodyfit.bodyfit.service.BoardTypeService;
 import com.bodyfit.bodyfit.util.UIUtil;
+
+import ch.qos.logback.core.joran.action.ParamAction;
 
 @Controller
 public class BoardController extends UIUtil {
@@ -27,27 +30,41 @@ public class BoardController extends UIUtil {
 	@Autowired
 	private BoardService boardService;
 	
-	@Autowired
-	private BoardTypeService boardTypeService;
-
 //========================================================================================================== 게시글 삭제
 	@PostMapping(value = "/board/boardDelete")
 	public String boardDelete(@ModelAttribute("boardDTO") BoardDTO boardDTO, @RequestParam(value = "bno", required = false) Integer bno, Model model) {
 		if (bno == null) {
-			return showMessageWithRedirect("올바르지 않은 접근입니다.", "/board/listNotice", Method.GET, null, model);
+			if(boardDTO.getBoardType() == "notice") {
+				return showMessageWithRedirect("올바르지 않은 접근입니다.", "/board/listNotice", Method.GET, null, model);
+			}else {
+				return showMessageWithRedirect("올바르지 않은 접근입니다.", "/board/listCommunity", Method.GET, null, model);
+			}
+			
 		}
 		Map<String, Object> pagingParams = getPagingParams(boardDTO);
 		try {
-			boardService.deleteBoard(bno);
+			System.out.println("삭제전 boardDTO"+boardDTO);
+			boardService.deleteBoard(boardDTO);
+
 		} catch (Exception e) {
-			return showMessageWithRedirect("게시글 삭제에 실패하였습니다.","/board/listNotice", Method.GET, pagingParams, model);
+			if(boardDTO.getBoardType() == "notice") {
+				return showMessageWithRedirect("게시글 삭제에 실패하였습니다.","/board/listNotice", Method.GET, pagingParams, model);
+			}else {
+				return showMessageWithRedirect("게시글 삭제에 실패하였습니다.","/board/listCommunity", Method.GET, pagingParams, model);
+			}
 		}
-		return showMessageWithRedirect("게시글 삭제가 완료되었습니다.", "/board/listNotice", Method.GET, pagingParams, model);
+		
+		if(boardDTO.getBoardType() == "notice") {
+			return showMessageWithRedirect("게시글 삭제가 완료되었습니다.", "/board/listNotice", Method.GET, pagingParams, model);
+		}else {
+			return showMessageWithRedirect("게시글 삭제가 완료되었습니다.", "/board/listCommunity", Method.GET, pagingParams, model);
+		}
 	}
 
 //========================================================================================================== 게시글 수정
 	@PostMapping(value="/board/boardUpdate")
 	public String boardUpdate(@ModelAttribute("params") BoardDTO params, Model model){		
+		System.out.println("수정완료 버튼 눌렀을시 params : "+params);
 		Map<String, Object> pagingParams = getPagingParams(params);
 		try {
 			System.out.println("updateBoard 호출 전");
@@ -56,14 +73,19 @@ public class BoardController extends UIUtil {
 		} catch (Exception e) {
 			return showMessageWithRedirect("게시글 수정에 실패하였습니다.", "/board/listNotice", Method.GET, pagingParams, model);
 		}
-		//System.out.println(pagingParams.toString());
-		return showMessageWithRedirect("게시글 수정이 완료되었습니다.", "/board/boardView?bno="+params.getBno()+"&currentPageNo="+params.getCurrentPageNo(), Method.GET, null, model);
+
+		System.out.println("boardType:"+params.getBoardType());
+		return showMessageWithRedirect("게시글 수정이 완료되었습니다.", "/board/boardView?bno="+params.getBno()+"&boardType="+params.getBoardType()+"&currentPageNo="+params.getCurrentPageNo(), Method.GET, null, model);
 		
 	}
 	
 	@GetMapping(value="/board/boardUpdate")
-	public String boardUpdate(@ModelAttribute("params") BoardDTO params, @RequestParam(value="bno", required=false) Integer bno, Model model) throws Exception{
-		BoardDTO board = boardService.selectBoardDetail(bno);
+	public String boardUpdate(@ModelAttribute("params") BoardDTO params,
+							  @RequestParam(value="bno", required=false) Integer bno, 
+							  @RequestParam(value="board_type", required=false) String boardType, 
+							  Model model) throws Exception{
+		BoardDTO board = boardService.selectBoardDetail(params);
+		System.out.println("board : "+board);
 		if(board == null) {
 			return showMessageWithRedirect("없는 게시글이거나 이미 삭제된 게시글입니다.", "/board/listNotice", Method.GET, null, model);
 		}		
@@ -73,14 +95,27 @@ public class BoardController extends UIUtil {
 	
 //======================================================================================================== 게시글 상세보기	
 	@GetMapping(value="/board/boardView")
-	public String boardView(HttpSession session, @ModelAttribute("params") BoardDTO params, @RequestParam(value="boardType", required=false) String boardType ,@RequestParam(value="bno", required=false) Integer bno, Model model) throws Exception{
+	public String boardView(HttpSession session, 
+							@ModelAttribute("params") BoardDTO params, 
+							@RequestParam(value="boardType", required=false) String boardType, 
+							@RequestParam(value="bno", required=false) Integer bno, 
+							Model model) throws Exception {
+		
 		if(bno==null) {
 			return showMessageWithRedirect("올바르지 않은 접근입니다.", "/board/listNotice", Method.GET, null, model);
 		}
-		BoardDTO board = boardService.selectBoardDetail(bno);
+		System.out.println("상세보기 params : "+params);
+		System.out.println("상세보기 boardType : "+boardType);
+		BoardDTO board = boardService.selectBoardDetail(params);
 		if(board == null) {
-			return showMessageWithRedirect("없는 게시글이거나 이미 삭제된 게시글입니다.", "/board/listNotice",Method.GET, null, model);
+			if(boardType=="notice") {
+				return showMessageWithRedirect("없는 게시글이거나 이미 삭제된 게시글입니다.", "/board/listNotice",Method.GET, null, model);
+			} else {
+				return showMessageWithRedirect("없는 게시글이거나 이미 삭제된 게시글입니다.", "/board/listCommunity",Method.GET, null, model);
+			}
+			
 		}
+		System.out.println("여기 오는지 체크. board : "+board);
 		UserDTO loginUser = (UserDTO) session.getAttribute("session_info");
 		model.addAttribute("loginUser", loginUser);
 		model.addAttribute("board", board);
@@ -93,13 +128,22 @@ public class BoardController extends UIUtil {
 		try {
 			boardService.insertBoard(boardDTO);
 		} catch (Exception e) {
-			return showMessageWithRedirect("게시글 등록에 실패하였습니다.", "/board/listNotice", Method.GET, null, model);
+			if(boardDTO.getBoardType() == "notice") {
+				return showMessageWithRedirect("게시글 등록에 실패하였습니다.", "/board/listNotice", Method.GET, null, model);
+			}else {
+				return showMessageWithRedirect("게시글 등록에 실패하였습니다.", "/board/listCommunity", Method.GET, null, model);
+			}
 		}
-		return showMessageWithRedirect("게시글 등록이 완료되었습니다.", "/board/listNotice", Method.GET, null, model);
+		if(boardDTO.getBoardType() == "notice") {
+			return showMessageWithRedirect("게시글 등록이 완료되었습니다.", "/board/listNotice", Method.GET, null, model);
+		}else {
+			return showMessageWithRedirect("게시글 등록이 완료되었습니다.", "/board/listCommunity", Method.GET, null, model);
+		}		
 	}
 	
 	@GetMapping(value="/board/boardWrite")
 	public String boardWrite(Model model, BoardDTO boardDTO, HttpSession session) throws Exception {
+		System.out.println("boardDTO : " + boardDTO);
 		UserDTO loginUser = (UserDTO) session.getAttribute("session_info");
 		model.addAttribute("loginUser", loginUser);
 		model.addAttribute("board", boardDTO);
@@ -107,22 +151,19 @@ public class BoardController extends UIUtil {
 	}
 //========================================================================================================= 게시글 목록	
 	@GetMapping(value="/board/listNotice")
-	public String listNotice(@ModelAttribute("params") 
-	BoardDTO boardDTO, Model model, BoardTypeDTO boardTypeDTO) throws Exception {
-		List<BoardDTO> list = boardService.selectBoardList(boardDTO);   
-		model.addAttribute("list", list);   
-		List<BoardTypeDTO> board_type = boardTypeService.selectBoardTypeList();
-		model.addAttribute("board_type", board_type);
+	public String listNotice(@ModelAttribute("params") BoardDTO boardDTO, Model model) throws Exception {
+		boardDTO.setBoardType("notice");
+		List<BoardDTO> list = boardService.selectBoardList(boardDTO);	
+		model.addAttribute("list", list); 
+	
 		return "board/listNotice";
 		
 	}
 	@GetMapping(value="/board/listCommunity")
-	public String listCommunity(@ModelAttribute("params") 
-	BoardDTO boardDTO, Model model, BoardTypeDTO boardTypeDTO) throws Exception {
+	public String listCommunity(@ModelAttribute("params") BoardDTO boardDTO, Model model) throws Exception {
+		boardDTO.setBoardType("community");
 		List<BoardDTO> list = boardService.selectBoardList(boardDTO);
 		model.addAttribute("list", list);   
-		List<BoardTypeDTO> board_type = boardTypeService.selectBoardTypeList();
-		model.addAttribute("board_type", board_type);
 		return "board/listCommunity";
 		
 	}

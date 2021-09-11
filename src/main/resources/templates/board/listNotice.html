@@ -14,6 +14,9 @@
 <section layout:fragment="content">
 	<div class="container" style="padding-top: 6rem; padding-bottom: 4rem;">
 		<div class="container-fluid">
+		<div>
+			<h1>공지사항</h1>
+		</div>
 			<div class="row">
 			<!-- 정렬-->
 			<div class="col-2">
@@ -26,6 +29,7 @@
 			<!-- 검색입력 -->
 			<div class="col-8 px-3" style="margin-left: auto;">
 			<form id="searchForm" th:action="@{/board/listNotice}" method="GET" th:onsubmit="return searchBoard(this)" role="form">
+				<input type="hidden" name="boardType" th:value="${params.boardType}" />
 				<input type="hidden" name="currentPageNo" value="1" />
 				<input type="hidden" name="recordsPerPage" th:value="${params.recordsPerPage}" />
 				<input type="hidden" name="pageSize" th:value="${params.pageSize}" />
@@ -59,7 +63,7 @@
 						<th scope="row" th:text=${row.bno}></th>
 						<td><a class="list" th:href="|@{/board/boardView}
 													${params.makeQueryString(params.currentPageNo)}
-													&bno=${row.bno}|"
+													&bno=${row.bno}&boardType=${row.boardType}|"
 							th:text="${row.title}"></a></td>
 						<td th:text="${row.writer}"></td>
 						<td th:text="${row.likeCnt}"></td>
@@ -68,7 +72,7 @@
 				</tbody>
 			</table>
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-				<a class="btn btn-primary" th:href="@{/board/boardWrite}">등록</a>
+				<a class="btn btn-primary" th:href="|@{/board/boardWrite}&boardType=${params.boardType}|">등록</a>
 			</div>
 			<th:block layout:fragment="paging">
 				<nav th:replace="fragments/common :: pagination"></nav>

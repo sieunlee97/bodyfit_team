@@ -34,27 +34,53 @@
 						id="content" rows="3" readonly></textarea>
 				</div>
 				<div class="d-grid gap-2 d-md-flex justify-content-md-end" th:object="${params}">
-					<a th:href="|@{/board/listNotice}*{makeQueryString(currentPageNo)}|" class="btn btn-warning"
+				
+					<a th:if="${params.boardType == 'community'}" th:href="|@{/board/listCommunity}*{makeQueryString(currentPageNo)}&board_type=${params.boardType}|" class="btn btn-warning"
 						type="button">이전</a>
-						<a th:if="${loginUser.nickname} == ${board.writer}"  class="btn btn-primary" th:href="|@{/board/boardUpdate}*{makeQueryString(currentPageNo)}&bno=${board.bno}|">수정</a>
-						<button th:if="${loginUser.nickname} == ${board.writer}" type="button" class="btn btn-secondary" th:onclick="deleteBoard([[ ${board.bno} ]],[[ *{makeQueryString(currentPageNo)} ]] )">삭제</button>
+					<a th:if="${params.boardType == 'notice'}" th:href="|@{/board/listNotice}*{makeQueryString(currentPageNo)}&board_type=${params.boardType}|" class="btn btn-warning"
+						type="button">이전</a>
+						<a th:if="${loginUser.nickname} == ${board.writer}"  class="btn btn-primary" 
+						th:href="|@{/board/boardUpdate}*{makeQueryString(currentPageNo)}&bno=${board.bno}&boardType=${board.boardType}">수정</a>
+						<button th:if="${loginUser.nickname} == ${board.writer}" type="button" class="btn btn-secondary" 
+						th:onclick="deleteBoard([[ ${board.bno} ]],[[ ${board.boardType} ]],[[ *{makeQueryString(currentPageNo)} ]] )">삭제</button>
 					</th:if>
 				</div>
 			</form>
+			<div class="text-center">
+			<form id="likeForm">
+				<input onclick='count("like")' id="likeBtn" type="button" class="btn btn-primary" th:value="${board.likeCnt}">
+				<i class="fas fa-thumbs-up mx-1"></i>좋아요
+				<input onclick='count("dislike")' id="dislikeBtn" type="button" class="btn btn-secondary" th:value="${board.dislikeCnt}">
+				<i class="fas fa-thumbs-down mx-1"></i>싫어요
+			</form>
+			</div>
 		</div>
 	</div>
 </section>
 <th:block layout:fragment="script">
 		<script th:inline="javascript">
 			/*<![CDATA[*/
+			function count(type) {
+				let likeNumber = $("#likeBtn").val();
+				let dislikeNumber = $('#dislikeBtn').val();
+				
+				if(type==='like'){
+					likeNumber= parseInt(likeNumber) + 1;
+					$("#likeBtn").val(likeNumber);	   
 
-			function deleteBoard(bno, queryString) {
+				}else if(type==='dislike'){
+					dislikeNumber= parseInt(dislikeNumber) + 1;
+					$("#dislikeBtn").val(dislikeNumber);
+				}
+			}
+			function deleteBoard(bno, boardType, queryString) {
 				if (confirm(bno + "번 게시글을 삭제할까요?")) {
 					var uri = /*[[ @{/board/boardDelete} ]]*/null;
 					var html = "";
 
 					html += '<form name="dataForm" action="'+uri+'" method="post">';
 					html += '<input type="hidden" name="bno" value="'+bno+'" />';
+					html += '<input type="hidden" name="boardType" value="'+boardType+'" />';
 					/*[- 쿼리 스트링을 오브젝트 형태로 변환 -]*/
 					queryString = new URLSearchParams(queryString);
 					queryString.forEach(function(value, key) {

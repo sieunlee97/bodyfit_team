@@ -34,10 +34,11 @@
 						id="content" rows="3" ></textarea>
 				</div>
 				<div class="d-grid gap-2 d-md-flex justify-content-md-end" th:obejct="${params}">
-					<a th:href="|@{/board/boardView}${params.makeQueryString(params.currentPageNo)}&bno=${board.bno}|" class="btn btn-warning">
+					<a th:href="|@{/board/boardView}${params.makeQueryString(params.currentPageNo)}&bno=${board.bno}&board_type=${params.boardType}|" class="btn btn-warning">
 					이전</a>
-					<input type="hidden" name="currentPageNo" th:value="${params.currentPageNo}">
-					<button class="btn btn-primary" type="submit">수정</button>
+					<input type="hidden" name="currentPageNo" th:field="*{currentPageNo}">
+					<input type="hidden" name="boardType" th:field="*{boardType}">
+					<button class="btn btn-primary" type="submit">수정완료</button>
 				</div>
 				
 			</form>
