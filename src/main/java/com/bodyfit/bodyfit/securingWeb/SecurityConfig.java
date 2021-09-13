@@ -1,14 +1,15 @@
 package com.bodyfit.bodyfit.securingWeb;
 
+import javax.servlet.http.HttpSessionListener;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.bodyfit.bodyfit.configuration.SessionListener;
 
 @Configuration
 @EnableWebSecurity //스프링 시큐리티 필터가 스프링 필터 체인에 등록된다.
@@ -19,8 +20,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.csrf().disable();
 		http
 			.authorizeRequests()
-				.antMatchers("/", "/diet/**","/member/**", "/board/**","/account/**","/css/**", "/js/**", "/img/**").permitAll()
-				.antMatchers("/inbody/**").hasAuthority("ROLE_USER")
+				.antMatchers("/", "/inbody/**","/diet/**","/member/**", "/board/**","/account/**","/css/**", "/js/**", "/img/**").permitAll()
+				.antMatchers().hasAuthority("ROLE_USER")
 //				.antMatchers("/**/*Write", "/**/*Update").access("hasRole('ROLE_USER')")
 				.anyRequest().authenticated()
 				.and()
@@ -36,6 +37,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public BCryptPasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+	
+	// 세션
+	@Bean
+	  public HttpSessionListener httpSessionListener(){
+
+	    return new SessionListener();
+
+	 }
 
 	
 }

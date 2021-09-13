@@ -143,7 +143,7 @@ public class BoardController extends UIUtil {
 	
 	@GetMapping(value="/board/boardWrite")
 	public String boardWrite(Model model, BoardDTO boardDTO, HttpSession session) throws Exception {
-		System.out.println("boardDTO : " + boardDTO);
+		//System.out.println("boardDTO : " + boardDTO);
 		UserDTO loginUser = (UserDTO) session.getAttribute("session_info");
 		model.addAttribute("loginUser", loginUser);
 		model.addAttribute("board", boardDTO);
