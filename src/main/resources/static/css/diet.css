@@ -1,6 +1,27 @@
+body{
+	font-family: 'IBM Plex Sans KR', sans-serif;
+}
 .btn-custom {
-	background-color: 	#FFA14C;
+	background-color:#f2ffbd;
 	font-size:22px;
 	font-weight:bold;
 }
+.main-card-body {
+	background-color:#b5d920;
+}
+h4{	
+		font-family: 'IBM Plex Sans KR', sans-serif;
+		font-weight:bolder;
+}
+span{
+	font-weight:bold;
+}
+.btn-warning{
+	font-family: 'IBM Plex Sans KR', sans-serif;
+	font-weight:bolder;
+}
 
+label {
+	color:gray;
+	font-weight:bolder;
+}

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="~{layout/layout}">
+<head>
+<!-- 필요한 CSS, script 추가 영역 -->
+</head>
+<th:block layout:fragment="css">
+<link th:href="@{/css/diet.css}" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@100;400&display=swap" rel="stylesheet">
+</th:block>
+
+<th:block layout:fragment="title">
+	<title>식단</title>
+</th:block>
+<section layout:fragment="content">
+	<div class="container" style="padding-top: 6rem; padding-bottom: 4rem;">
+		<div class="container-fluid">
+
+        <!-- 상단 칼로리 표시 -->
+          <div class="row">
+            <div class="col-xl-3 col-lg-6 col-md-12 col-12 mt-3">
+              <!-- card -->
+              <div class="card rounded-3" style="height:150px;">
+                <!-- card body -->
+                <div class="card-body main-card-body">
+                  <!-- heading -->
+                  <div class="d-flex justify-content-between align-items-center
+                    mb-3">
+                    <div>
+                      <h4 class="mb-0">권장칼로리</h4>
+                    </div>
+                    <div class="icon-shape icon-md bg-light-primary text-primary
+                      rounded-1">
+                    </div>
+                  </div>
+                  <div>
+                    <h1 class="fw-bold">1800</h1>
+                    <p class="mb-0">kcal</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-6 col-md-12 col-12 mt-3">
+              <!-- card -->
+              <div class="card rounded-3" style="height:150px;">
+                <!-- card body -->
+                <div class="card-body main-card-body">
+                  <!-- heading -->
+                  <div class="d-flex justify-content-between align-items-center
+                    mb-3">
+                    <div>
+                      <h4 class="mb-0">섭취칼로리</h4>
+                    </div>
+                    <div class="icon-shape icon-md bg-light-primary text-primary
+                      rounded-1">
+                    </div>
+                  </div>
+                  <!-- project number -->
+                  <div>
+                    <h1 class="fw-bold">800</h1>
+                    <p class="mb-0">kcal</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-6 col-lg-12 col-md-12 col-12 mt-3">
+              <!-- card -->
+              <div class="card rounded-3" style="height:150px;">
+                <!-- card body -->
+                <div class="card-body main-card-body">
+                  <!-- heading -->
+                  <div class="d-flex justify-content-between align-items-center
+                    mb-3">
+                    <div>
+                      <h4 class="mb-0">섭취영양소</h4>
+                    </div>
+                    <div class="icon-shape icon-md bg-light-primary text-primary
+                      rounded-1">
+                    </div>
+                  </div>
+                  <!-- project number -->
+                  <div>
+                    <span class="mb-0">탄수화물</span><span style="float:right;">55 g</span><br>
+                    <span class="mb-0">단백질</span><span style="float:right;">55.9 g</span><br>
+                    <span class="mb-0">지방</span><span  style="float:right;">55.3 g</span><br>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="row">
+          	<div class="col-xl-6 col-lg-6 col-md-12 col-12 mt-3">
+          		<a th:href="@{/diet/dietWrite}" type="button" class="btn btn-warning" style="width:100%; ">식단 입력하기</a>
+          	</div>
+          	<div class="col-xl-6 col-lg-6 col-md-12 col-12 mt-3">
+          		<button type="button" id="listBtn" class="btn btn-warning" data-toggle="modal" data-target="dayListModal" style="width:100%; ">일일 식단 목록</button>
+          	</div>
+          </div>
+         <!-- 메인 식단 기록 버튼 -->
+          <div class="row">
+          	<div class="col-xl-6 col-lg-6 col-md-12 col-12 mt-3">
+          		<button type="button" class="btn btn-custom" style="width:100%; height:200px;">아침<br>230 kcal</button>
+          	</div>
+          	<div class="col-xl-6 col-lg-6 col-md-12 col-12 mt-3">
+          		<button type="button" class="btn  btn-custom" style="width:100%; height:200px;">점심<br>400 kcal</button>
+          	</div>
+          	<div class="col-xl-6 col-lg-6 col-md-12 col-12 mt-3">
+          		<button type="button" class="btn  btn-custom" style="width:100%; height:200px;">저녁<br>0 kcal</button>
+          	</div>
+          	<div class="col-xl-6 col-lg-6 col-md-12 col-12 mt-3">
+          		<button type="button" class="btn  btn-custom" style="width:100%; height:200px;">간식<br>170 kcal</button>
+          	</div>
+          </div>
+        </div>
+     </div>
+      <!-- Modal -->
+	<div class="modal fade" id="dayListModal" tabindex="-1" role="dialog" aria-labelledby="dayListModal" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">일일 식단 목록</h5>
+	      </div>
+	      <div class="modal-body">
+	       	<div class="col-sm-3" style="width:50%;">
+			     <input type="date" class="form-control" id="currentDate" name="startday">
+		   </div>
+		   <div class="my-3 px-2">
+		        <div class="form-group row mt-3">
+			      <label class="col-sm-3 col-form-label">아침</label>
+			      <div class="col-sm-3">
+			        <input class="form-control-plaintext" type="text" value="130kcal" readonly>
+			      </div>
+			  	</div>
+		       <div class="form-group row mt-3">
+			      <label class="col-sm-3 col-form-label">점심</label>
+			      <div class="col-sm-3">
+			        <input class="form-control-plaintext" type="text" value="400kcal" readonly>
+			      </div>
+			  	</div>
+		        <div class="form-group row mt-3">
+			      <label class="col-sm-3 col-form-label">저녁</label>
+			      <div class="col-sm-3">
+			        <input class="form-control-plaintext" type="text" value="0kcal" readonly>
+			      </div>
+			  	</div>
+		        <div class="form-group row mt-3">
+			      <label class="col-sm-3 col-form-label">간식</label>
+			      <div class="col-sm-3">
+			        <input class="form-control-plaintext" type="text" value="170kcal" readonly>
+			      </div>
+			  	</div>
+		        <div class="progress mt-4" style="height: 20px;">
+  					<div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width:44.4%" aria-valuenow="44.4" aria-valuemin="0" aria-valuemax="100">
+  						44.4%
+  					</div>
+				</div>
+				<span style="float:right;">1800kcal</span>
+	     	</div>
+	      </div>
+	      <div class="modal-footer">
+	        <a id="close" href="#" class="btn btn-secondary" data-dismiss="modal">닫기</a>
+	        <button type="button" class="btn btn-primary">식단추가</button>
+	      </div>
+	    </div>
+	  </div>
+	</div> 
+     
+</section>
+<th:block layout:fragment="script">
+		<script th:inline="javascript">	
+		/*<![CDATA[*/
+			
+		 document.getElementById('currentDate').value = new Date().toISOString().substring(0, 10);;	
+			
+			
+		$('#listBtn').click(function(e){
+			e.preventDefault();
+			$('#dayListModal').modal("show");
+		});
+		
+		$('#close').click(function(e){
+			e.preventDefault();
+			$('#dayListModal').modal("hide");
+		});
+		/*[- end of function -]*/
+		/*]]>*/
+		</script>
+</th:block>
+</html>

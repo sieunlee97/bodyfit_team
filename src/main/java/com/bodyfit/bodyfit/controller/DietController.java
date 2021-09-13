@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class DietController {
 	
-	@GetMapping(value="/diet/main")
+	@GetMapping(value="/diet/dietMain")
 	public String main() {
-		return "diet/main";
+		return "diet/dietMain";
 	}
 	
 	@GetMapping(value="/diet/dietWrite")

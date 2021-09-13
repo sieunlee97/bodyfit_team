@@ -2,23 +2,85 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="~{layout/layout}">
-<head>
 <!-- 필요한 CSS, script 추가 영역 -->
+<th:block layout:fragment="css">
 <script type="text/javascript" th:src="@{/js/common.js}"></script>
 <link th:href="@{/css/board.css}" rel="stylesheet">
-</head>
+<link th:href="@{/css/diet.css}" rel="stylesheet">
+</th:block>
 
 <th:block layout:fragment="title">
 	<title>게시판</title>
 </th:block>
 <section layout:fragment="content">
-	<div class="container" style="padding-top: 6rem; padding-bottom: 4rem;">
+	<div class="container" style="padding-top: 7rem; padding-bottom: 4rem;">
 		<div class="container-fluid">
-		<div>
-			<h1>식단 입력하기</h1>
+			<div style="padding-bottom:1rem;">
+			<p>식단 > 식단 입력</p>
 		</div>
-		
+		<div class="card border-warning mb-3">
+		  <div class="card-header">상세 입력</div>
+			  <div class="card-body">
+			  <form class="d-flex">
+			   <input type="text" class="form-control" placeholder="search">
+			  </form>
+			  <div class="form-group row mt-3">
+			      <label for="unit" class="col-sm-1 col-form-label">섭취량</label>
+			      <div class="col-sm-3">
+			        <input class="form-control" id="unit" value="1" min="1" max="10" step="0.5" type="number" >
+			      </div>
+			  </div>
+			  <p class="mt-4">영양정보</p>
+			   <table class="table table-hover text-center">   
+				  <thead>
+				    <tr>
+				      <th scope="col">기준량 (kcal)</th>
+				      <th scope="col">탄수화물 (g)</th>
+				      <th scope="col">단백질 (g)</th>
+				      <th scope="col">지방 (g)</th>
+				    </tr>
+				  </thead>
+					 <tr class="table-secondary">
+				      <td></td>
+				      <td></td>
+				      <td></td>
+				      <td></td>
+				    </tr>
+				</table>
+				<div class="btn-group" style="width:100%;">
+					<input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
+					<label class="btn btn-warning mx-1" for="option1">아침</label>
+					
+					<input type="radio" class="btn-check" name="options" id="option2" autocomplete="off">
+					<label class="btn btn-warning mx-1" for="option2">점심</label>
+					
+					<input type="radio" class="btn-check" name="options" id="option3" autocomplete="off">
+					<label class="btn btn-warning mx-1" for="option3">저녁</label>
+					
+					<input type="radio" class="btn-check" name="options" id="option4" autocomplete="off">
+					<label class="btn btn-warning mx-1" for="option4">간식</label>
+				</div>
+				<div class="form-group row mt-3">
+			      <label for="unit" class="col-sm-1 col-form-label ">섭취일시</label>
+			      <div class="col-sm-3">
+			        <input id="currentDateTime" type="datetime-local" class="form-control" name="starttime">
+			      </div>
+			  </div>
+			  <div class="my-2" style="float:right;">
+			  	<a class="btn btn-secondary" href="#">이전</a>
+			  	<a class="btn btn-primary" href="#">저장</a>
+			  </div>
+			  </div>
+		  </div>	
 		
 		</div>
 	</div>
 </section>
+<th:block layout:fragment="script">
+		<script th:inline="javascript">	
+		/*<![CDATA[*/
+		 document.getElementById('currentDateTime').value= new Date().toISOString().slice(0, -1);
+		/*[- end of function -]*/
+		/*]]>*/
+		</script>
+</th:block>
