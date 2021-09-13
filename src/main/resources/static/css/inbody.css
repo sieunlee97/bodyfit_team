@@ -12,7 +12,7 @@ html, body{
 body{
   display: flex;
   align-items: center;
-  font-family: 'Cafe24SsurroundAir';
+ font-family: 'IBM Plex Sans KR', sans-serif;
   font-weight:600;
 }
 
@@ -22,7 +22,7 @@ body{
 
 .btn-text{
 	color:#959595;
-	font-family: 'Cafe24SsurroundAir';
+	font-family: 'IBM Plex Sans KR', sans-serif;
 }
 .btn-text:hover{
 	color:#3D3D3D;
@@ -30,7 +30,7 @@ body{
 
 .inbody-text{
 	color:#3D3D3D;
-	 font-family: 'Cafe24SsurroundAir';
+	font-family: 'IBM Plex Sans KR', sans-serif;
 }
 
 #q1, #q2, #q3, #q4, #q5, #q6, #q7 {
@@ -38,7 +38,7 @@ body{
   display:none;
 }
 .qBox {
-  font-family: 'Cafe24SsurroundAir';
+  font-family: 'IBM Plex Sans KR', sans-serif;
   background-color: whitesmoke;
   text-align: center;
   border-radius: 20px;

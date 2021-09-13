@@ -14,6 +14,9 @@
 <section layout:fragment="content">
 	<div class="container" style="padding-top: 6rem; padding-bottom: 4rem;">
 		<div class="container-fluid">
+			<div style="padding-bottom:1rem;">
+				<p>마이페이지 > 인바디 결과 목록</p>
+			</div>
 			<table class="table table-hover text-center">
 				<thead>
 					<tr>
@@ -29,7 +32,7 @@
 					</tr>
 				</tbody>
 			</table>
-	
+			<a class="btn btn-primary" style="float:right;" th:href="@{/inbody/main}">인바디 검사 하기</a>
 			<th:block layout:fragment="paging">
 				<nav th:replace="fragments/common :: pagination"></nav>
 			</th:block>

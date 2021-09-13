@@ -25,12 +25,12 @@ public class InbodyController {
 	@Autowired
 	private InbodyService inbodyService;
 	
-	@GetMapping(value="/inbody/main")
+	@GetMapping(value="/inbody/inbodyMain")
 	public String home(Model model, InbodyDTO inbodyDTO, HttpSession session) throws Exception {
 		UserDTO loginUser = (UserDTO) session.getAttribute("session_info");
 		model.addAttribute("loginUser", loginUser);
 		model.addAttribute("inbodyDTO", inbodyDTO);
-		return "inbody/main";
+		return "inbody/inbodyMain";
 		
 	}
 	
