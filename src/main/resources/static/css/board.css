@@ -1,4 +1,21 @@
+body{
+	font-family: 'IBM Plex Sans KR', sans-serif;
+}
+h2{
+	color:#f4623a;
+	font-weight:bold;
+}
+
 .list {
 	text-decoration:none;
 	color:#000;
+}
+
+p{
+	color:gray;
+	font-weight:bolder;
+}
+
+textarea {
+	 min-height: 250px;
 }

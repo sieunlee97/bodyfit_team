@@ -3,8 +3,12 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="~{layout/layout}">
 <head>
-<!-- 필요한 CSS, script 추가 영역 -->
+<link rel="stylesheet" th:href="@{/css/board.css}">
 </head>
+<!-- 필요한 CSS, script 추가 영역 -->
+<th:block layout:fragment="css">
+<link rel="stylesheet" th:href="@{/css/board.css}">
+</th:block>
 <th:block layout:fragment="title">
 	<title>게시판</title>
 </th:block>
@@ -12,6 +16,12 @@
 <section layout:fragment="content">
 	<div class="container" style="padding-top: 6rem;">
 	<div class="container-fluid">
+	<div style="padding-bottom:1rem;">
+			<p>게시판 > 
+			<span style="color:#f4623a;" th:if="${params.boardType == 'notice'}" th:text="공지사항"></span> 
+			<span style="color:#f4623a;" th:if="${params.boardType == 'community'}" th:text="자유게시판"></span>
+			> 글 등록하기</p>
+		</div>
 		<form th:action="@{/board/boardRegister}" th:object="${board}" method="POST">
 			<div class="mb-3">
 			  <label for="title" class="form-label">제목</label>

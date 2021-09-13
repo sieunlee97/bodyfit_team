@@ -3,18 +3,23 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorator="~{layout/mainlayout}">
 <head>
+<th:block layout:fragment="css">
+</th:block>
+<style>
+</style>
 <section layout:fragment="content">
 <!-- Masthead-->
         <header class="masthead">
             <div class="container px-4 px-lg-5 h-100">
                 <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
                     <div class="col-lg-8 align-self-end">
-                        <h1 class="text-white font-weight-bold">You will start dieting "TODAY"</h1>
+                        <h1 class="text-white font-weight-bold" style="font-family: 'Oswald', sans-serif; font-weight:bolder; text-shadow:5px 5px 0px orange;">
+                        DON'T WISH FOR IT,<br>WORK FOR IT</h1>
                         <hr class="divider">
                     </div>
                     <div class="col-lg-8 align-self-baseline">
-                        <p class="text-white-75 mb-5">인바디 검사를 통한 다이어트 계획 수립</p>
-                        <a class="btn btn-primary btn-xl" th:href="@{/inbody/main}">인바디 테스트</a>
+                        <p class="mb-5" style="font-weight:bold; color:#3D3D3D;">다이어트, 상상하지만 말고 지금 당장 실천하세요! <br> 간단한 인바디 검사로 나에게 맞는 다이어트를 해보세요</p>
+                        <a class="btn btn-primary btn-xl" style="font-family:'IBM Plex Sans KR', sans-serif;" th:href="@{/inbody/inbodyMain}">인바디 테스트</a>
                     </div>
                 </div>
             </div>

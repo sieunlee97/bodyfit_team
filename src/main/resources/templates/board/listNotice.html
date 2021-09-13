@@ -12,10 +12,10 @@
 	<title>게시판</title>
 </th:block>
 <section layout:fragment="content">
-	<div class="container" style="padding-top: 6rem; padding-bottom: 4rem;">
+	<div class="container" style="padding-top: 7rem; padding-bottom: 4rem;">
 		<div class="container-fluid">
 		<div>
-			<h1>공지사항</h1>
+			<h2>공지사항</h2>
 		</div>
 			<div class="row">
 			<!-- 정렬-->
@@ -72,7 +72,7 @@
 				</tbody>
 			</table>
 			<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-				<a class="btn btn-primary" th:href="|@{/board/boardWrite}&boardType=${params.boardType}|">등록</a>
+				<a class="btn btn-primary" th:href="|@{/board/boardWrite}|">등록</a>
 			</div>
 			<th:block layout:fragment="paging">
 				<nav th:replace="fragments/common :: pagination"></nav>
