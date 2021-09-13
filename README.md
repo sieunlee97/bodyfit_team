@@ -26,7 +26,7 @@
 인바디 검사와 식단입력은 회원가입 후 로그인 시 이용 가능하며, 게시판 보기는 비회원도 이용 가능합니다.
 
 <figure>
-  <img src="https://user-images.githubusercontent.com/63999784/132992425-4dd852a9-a3db-425e-9341-e6ccca6bb699.PNG">
+  <img src="https://user-images.githubusercontent.com/63999784/133044142-ba91b5ee-b24e-409c-9328-1f83bbe6302f.PNG">
 </figure>
 
 ### 1. 인바디 검사
