@@ -29,7 +29,6 @@
   <img src="https://user-images.githubusercontent.com/63999784/132992425-4dd852a9-a3db-425e-9341-e6ccca6bb699.PNG">
 </figure>
 
-
 ### 1. 인바디 검사
 회원가입 완료 후 로그인 시, 이용 가능합니다.
 
@@ -54,11 +53,19 @@
 :bangbang: 항목을 모두 입력하면 입력한 데이터를 기반으로 결과가 도출됩니다.<br>
 
 #### 1-4 인바디 결과
+인바디 검사 직후 확인 가능하며, 지난 결과 목록은 마이페이지의 인바디 결과 목록에서 확인 가능합니다.
+<img src="https://user-images.githubusercontent.com/63999784/133040471-0e9a9ee4-2e05-45af-adc5-a11a8c194ec2.PNG">
+<img src="https://user-images.githubusercontent.com/63999784/133041681-c5cb73f5-c4a8-495f-82a5-ca376327faac.PNG">
 
 ### 2. 식단
 인바디 검사 후 이용 가능하며, 인바디 결과를 토대로 권장칼로리가 제공됩니다.
 
 #### 2-1 식단 메인
-<img src="https://user-images.githubusercontent.com/63999784/132994109-e24a62a0-baf6-44ff-9209-9bfa476928df.PNG">
+<img src="https://user-images.githubusercontent.com/63999784/133040448-00c8d491-a2fa-4257-9f2c-ee0a4115fedd.PNG">
 
 #### 2-2 식단 입력
+<img src="https://user-images.githubusercontent.com/63999784/133040462-5cef64f0-ae3d-4c1d-aa01-c1dad9297ad3.PNG">
+:bangbang: 식품의약품안전처 인증키발급정보 식품영양성분DB OpenAPI 활용 예정<br>
+
+#### 2-3 식단 목룍
+<img src="https://user-images.githubusercontent.com/63999784/133040458-57b42f2e-9014-4b8a-aba4-ea5f92b57485.PNG">
