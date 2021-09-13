@@ -47,7 +47,7 @@
 
 #### 1-3 인바디 검사
 <figure>
-  <img src="https://user-images.githubusercontent.com/63999784/132988738-0845ec4b-df9e-4ee7-9794-da284cfd268d.PNG">
+  <img src="https://user-images.githubusercontent.com/63999784/133042251-35307772-91bb-4018-bc6d-7f01d826187f.PNG">
 </figure>
 :bangbang: 총 7개의 항목 : 성별, 나이,키, 몸무게, 현재 체지방률, 목표 체지방률, 운동량, 다이어트 타입, 목표 기간 <br>
 :bangbang: 항목을 모두 입력하면 입력한 데이터를 기반으로 결과가 도출됩니다.<br>
@@ -69,3 +69,18 @@
 
 #### 2-3 식단 목룍
 <img src="https://user-images.githubusercontent.com/63999784/133040458-57b42f2e-9014-4b8a-aba4-ea5f92b57485.PNG">
+
+
+### 3. 게시판
+공지사항과 자유게시판으로 구분되며, 공지사항은 관리자권한만 등록 가능합니다. <br>
+공지사항 조회와 자유게시판 등록 및 조회는 모든 이용자가 가능합니다.<br>
+작성자 및 제목으로 검색 가능하고, 최신순 또는 좋아요 순으로 정렬할 수 있습니다.
+
+#### 3-1 게시글 목록
+<img src="https://user-images.githubusercontent.com/63999784/133043161-8612e7b0-542d-470f-8485-e7252030c923.PNG">
+
+#### 3-1 게시글 상세보기
+<img src="https://user-images.githubusercontent.com/63999784/133043154-fbd4a50f-139e-41fd-8aec-c5e7823bfa57.PNG">
+
+:bangbang: 로그인한 사용자와 작성자의 닉네임이 일치할 때, 수정 및 삭제가 가능합니다. <br>
+:bangbang: 좋아요 또는 싫어요를 누를 수 있습니다.
