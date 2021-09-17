@@ -75,7 +75,7 @@
   <img src="https://user-images.githubusercontent.com/63999784/133040462-5cef64f0-ae3d-4c1d-aa01-c1dad9297ad3.PNG">\
 </figure>
 
-:bangbang: 식품의약품안전처 인증키발급정보 식품영양성분DB OpenAPI 활용 예정<br>
+:bangbang: 식품의약품안전처 식품영양성분DB OpenAPI 활용 예정<br>
 
 #### 2-3 식단 목록
 
