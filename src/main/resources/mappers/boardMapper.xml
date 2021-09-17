@@ -51,7 +51,7 @@
 				board_type= #{boardType}
 				<include refid="mappers.commonMapper.search" />
 		ORDER BY 
-				bno DESC 
+				reg_date DESC 
 				<include refid="mappers.commonMapper.paging" />
 	</select>
 	

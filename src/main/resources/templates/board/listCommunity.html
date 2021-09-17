@@ -60,8 +60,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="table-warning" th:each="row:${list}">
-						<th scope="row" th:text=${row.bno}></th>
+					<tr class="table-warning" th:each="row, i:${list}">
+						<th th:text="${total-(params.currentPageNo*params.recordsPerPage)+params.recordsPerPage-i.index}">
+						</th>
 						<td><a class="list" th:href="|@{/board/boardView}
 													${params.makeQueryString(params.currentPageNo)}
 													&bno=${row.bno}&boardType=${row.boardType}|"

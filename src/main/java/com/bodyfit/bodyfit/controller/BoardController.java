@@ -1,13 +1,11 @@
 package com.bodyfit.bodyfit.controller;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.ParameterizedPreparedStatementSetter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,12 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.bodyfit.bodyfit.constant.Method;
 import com.bodyfit.bodyfit.model.BoardDTO;
-import com.bodyfit.bodyfit.model.BoardTypeDTO;
 import com.bodyfit.bodyfit.model.UserDTO;
+import com.bodyfit.bodyfit.paging.PaginationInfo;
 import com.bodyfit.bodyfit.service.BoardService;
 import com.bodyfit.bodyfit.util.UIUtil;
-
-import ch.qos.logback.core.joran.action.ParamAction;
 
 @Controller
 public class BoardController extends UIUtil {
@@ -153,17 +149,21 @@ public class BoardController extends UIUtil {
 	@GetMapping(value="/board/listNotice")
 	public String listNotice(@ModelAttribute("params") BoardDTO boardDTO, Model model) throws Exception {
 		boardDTO.setBoardType("notice");
+		int total = boardService.selectBoardTotalCount(boardDTO);
 		List<BoardDTO> list = boardService.selectBoardList(boardDTO);	
 		model.addAttribute("list", list); 
-	
+		model.addAttribute("total", total);
 		return "board/listNotice";
 		
 	}
 	@GetMapping(value="/board/listCommunity")
-	public String listCommunity(@ModelAttribute("params") BoardDTO boardDTO, Model model) throws Exception {
+	public String listCommunity(@ModelAttribute("params") BoardDTO boardDTO, Model model) throws Exception {	
 		boardDTO.setBoardType("community");
+		System.out.println("게시글 총 개수");
+		int total = boardService.selectBoardTotalCount(boardDTO);
 		List<BoardDTO> list = boardService.selectBoardList(boardDTO);
-		model.addAttribute("list", list);   
+		model.addAttribute("list", list); 
+		model.addAttribute("total", total);
 		return "board/listCommunity";
 		
 	}
