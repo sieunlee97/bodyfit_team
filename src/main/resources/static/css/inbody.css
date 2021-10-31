@@ -12,7 +12,7 @@ html, body{
 body{
   display: flex;
   align-items: center;
- font-family: 'IBM Plex Sans KR', sans-serif;
+  font-family: 'IBM Plex Sans KR', sans-serif;
   font-weight:600;
 }
 
@@ -36,6 +36,9 @@ body{
 #q1, #q2, #q3, #q4, #q5, #q6, #q7 {
   text-align:center;
   display:none;
+}
+#q5, #q6{
+	padding-top:150px;
 }
 .qBox {
   font-family: 'IBM Plex Sans KR', sans-serif;
