@@ -4,9 +4,9 @@
 간단한 인바디 검사를 통해 얻은 결과로 다이어트 계획을 세우고, 식단을 관리하는 프로그램.
 
 ## :high_brightness: 개요
-**기간** : 2021.08.06 - 진행 중 <br>
+**기간** : 2021.08.09 - 진행 중 <br>
 **인원** : 1명 <br>
-**산출물** : 기능명세서, 화면설계서, 기능명세서 <br>
+**산출물** : [기능명세서](https://docs.google.com/spreadsheets/d/1L-KKWbsPoE57nKr2RHSAJG1CAai7fB-dlXGowB7tyao/edit?usp=sharing), [화면설계서](https://drive.google.com/file/d/1Xznkdiz6SSP7EBszNOcNaMHtefeCOrYQ/view?usp=sharing), [테이블설계서](https://www.erdcloud.com/d/2x4h8egc5tteHRYzA) <br>
 
 **<개발환경>** <br>
 **OS** : Windows <br>
@@ -72,10 +72,10 @@
 
 #### 2-2 식단 입력
 <figure>
-  <img src="https://user-images.githubusercontent.com/63999784/133040462-5cef64f0-ae3d-4c1d-aa01-c1dad9297ad3.PNG">\
+  <img src="https://user-images.githubusercontent.com/63999784/133040462-5cef64f0-ae3d-4c1d-aa01-c1dad9297ad3.PNG">
 </figure>
 
-:bangbang: 식품의약품안전처 인증키발급정보 식품영양성분DB OpenAPI 활용 예정<br>
+:bangbang: 식품의약품안전처 식품영양성분DB OpenAPI 활용 예정<br>
 
 #### 2-3 식단 목록
 
