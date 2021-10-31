@@ -10,8 +10,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class InbodyDTO {
+	private InbodyInfo inbodyInfo;
 	/*인바디 검사 날짜*/
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
 	private Date inbodyDate;
 	/*사용자 이메일*/
 	private String email;
@@ -45,5 +46,4 @@ public class InbodyDTO {
 	private int period;
 	/*평소 운동량*/
 	private String exercise;
-		
 }

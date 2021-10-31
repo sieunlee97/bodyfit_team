@@ -40,7 +40,7 @@
 		FROM 
 				tbl_inbody
 		WHERE 
-				email=#{email}
+				email=#{email} 
 
 	</select>
 	
@@ -49,6 +49,7 @@
 	
 		SELECT 
 				<include refid="inbodyColumns" />
+				,bmi
 		FROM 
 				tbl_inbody
 		WHERE 
@@ -57,6 +58,19 @@
 				inbody_date desc 
 		limit 
 				1
+	</select>
+	
+	<select id="selectInbodyDetails" parameterType="InbodyDTO" resultType="InbodyDTO">
+	
+		SELECT 
+				<include refid="inbodyColumns" />
+				,bmi
+		FROM 
+				tbl_inbody
+		WHERE 
+				email = #{email}
+				AND
+				inbody_date like concat('%', #{inbodyDate}, '%')
 	</select>
 
 </mapper>

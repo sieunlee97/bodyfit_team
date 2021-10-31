@@ -27,7 +27,7 @@
 				<tbody>
 				
 					<tr class="table-warning" th:each="row:${list}">	
- 						<td th:text="${#dates.format(row.inbodyDate, 'yyyy-MM-dd')}"></td>
+ 						<td><a th:href="@{/inbody/result}" th:text="${#dates.format(row.inbodyDate, 'yyyy-MM-dd HH:mm:ss')}"></a></td>
 						<td th:text="${row.currentFatRate}"></td>
 					</tr>
 				</tbody>

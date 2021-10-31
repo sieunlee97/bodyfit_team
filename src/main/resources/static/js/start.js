@@ -34,6 +34,8 @@ function goThree() {
 		}, 450)
 	}, 450);
 }
+
+
 function goFour() {
 	q3.style.WebkitAnimation = "fadeOut 1s";
 	q3.style.animation = "fadeOut 1s";

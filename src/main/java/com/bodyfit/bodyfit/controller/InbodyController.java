@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.bodyfit.bodyfit.model.BoardDTO;
 import com.bodyfit.bodyfit.model.InbodyDTO;
 import com.bodyfit.bodyfit.model.UserDTO;
 import com.bodyfit.bodyfit.service.InbodyService;
@@ -41,9 +40,13 @@ public class InbodyController {
 	}
 	
 	@GetMapping(value="/inbody/result")
-	public String result(Model model,InbodyController inbodyDTO, @RequestParam(value="email") String email) throws Exception {
-		inbodyService.selectInbodyDetail(email);
-		model.addAttribute("inbodyDTO", inbodyDTO);
+	public String result(HttpSession session, Model model,InbodyDTO inbodyDTO
+			,@RequestParam(value="inbodyDate", required=false) @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'") Date inbodyDate) throws Exception {
+		UserDTO loginUser = (UserDTO) session.getAttribute("session_info");
+		model.addAttribute("loginUser", loginUser);
+		inbodyDTO.setEmail(loginUser.getEmail());
+		InbodyDTO result = inbodyService.selectInbodyDetails(inbodyDTO);
+		model.addAttribute("inbodyDTO", result);
 		return "inbody/result";
 	}
 	
